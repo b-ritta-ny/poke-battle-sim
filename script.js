@@ -10,7 +10,7 @@ const renderPoke = (data) => {
   pokeH1.className = 'pkmn'
   pokeId.innerHTML = `<br>${data.id}`
   pokeId.className = 'idNum'
-
+  
   if (data.id === 4)
     pokeImg.src = data.sprites.front_default
   else if (data.id === 7)
@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.moves[2].move.name,
         data.moves[3].move.name,
       ]
+
     }
   }
   fetch('https://pokeapi.co/api/v2/pokemon/1')
@@ -159,8 +160,17 @@ document.addEventListener('DOMContentLoaded', () => {
       //battlePoke(7, 4, pokeObj)
     })
 
-
   console.log(pokeObj)
+
+  battlePoke(1, 4)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      console.log('I was reset')
+      document.querySelector('yourPokeHP').innerText = 100
+      document.querySelector('rivalPokeHP').innerText = 100
+    }
+  })
+  //form submission event handler (keep this commented out code!!!)
 
 
   const battleForm = document.querySelector('#choosePkmn')
@@ -174,4 +184,5 @@ document.addEventListener('DOMContentLoaded', () => {
     battlePoke(yourInput, rivalInput, pokeObj);
   };
   battleForm.addEventListener('submit', handleSubmit);
+
 })
