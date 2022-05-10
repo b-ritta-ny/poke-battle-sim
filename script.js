@@ -1,7 +1,14 @@
-const renderPoke = (data)=>{
+const renderPoke = (data) => {
     const pokeList = document.querySelector('#pokeList')
     const h1 = document.createElement('h1')
-    
+
+}
+
+//form submission event handler
+const battleBtn = document.querySelector('#battleBtn')
+battleBtn.addEventListener('click', handleSubmit)
+const handleSubmit = () => {
+
 }
 
 document.addEventListener('DOMContentLoaded', () => {
