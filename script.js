@@ -26,6 +26,13 @@ const battlePoke = (yourId, rivalId, obj) => {
     const addClick = (move) => {
         console.log(move)
         move.addEventListener('click', ()=>{
+            // adding text under your div that says what move you used
+            const yourPokeDiv = document.querySelector('#yourPokeDiv')
+            const div = document.createElement('div')
+            div.textContent = `You used ${move.textContent}!`
+            yourPokeDiv.append(div)
+
+            // subtracting rival's HP
             const rivalHP = document.querySelector('#rivalPokeHP')
             let numHP = parseInt(rivalHP.textContent)
             if(numHP > 0){numHP -= 20}
@@ -37,11 +44,40 @@ const battlePoke = (yourId, rivalId, obj) => {
                 form.append(winningH1)
             }
             rivalHP.textContent = numHP
+
+            // rival move
+            function randomIntFromInterval(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min)
+            }
+            const rndInt = randomIntFromInterval(0, 3)
+            console.log(rndInt)
+            const rivalMove = rivalMovesArray[rndInt].textContent
+
+            const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
+            const rivalDiv = document.createElement('div')
+            rivalDiv.textContent = `Rival used ${rivalMove}!`
+            rivalPokeDiv.append(rivalDiv)
+
+            // subtracting your HP
+            const yourHP = document.querySelector('#yourPokeHP')
+            let yourNumHP = parseInt(yourHP.textContent)
+            if(yourNumHP > 0){yourNumHP -= 10}
+            yourHP.textContent = yourNumHP
         })
     }
 
+    const yourImg = document.createElement('img')
+    yourImg.src = obj[yourId].img
+    yourImg.className = 'choosePkmn'
+
+    const rivalImg = document.createElement('img')
+    rivalImg.src = obj[rivalId].img
+    rivalImg.className = 'choosePkmn'
+
     const yourName = document.querySelector('#yourPokeName')
     yourName.textContent = obj[yourId].name
+    yourName.className = 'pkmn'
+    yourName.append(yourImg)
 
     const yourMove1 = document.querySelector('#yourPokeMove1')
     yourMove1.textContent = obj[yourId].moves[0]
@@ -57,6 +93,8 @@ const battlePoke = (yourId, rivalId, obj) => {
 
     const rivalName = document.querySelector('#rivalPokeName')
     rivalName.textContent = obj[rivalId].name
+    rivalName.className = 'pkmn'
+    rivalName.append(rivalImg)
 
     const rivalMove1 = document.querySelector('#rivalPokeMove1')
     rivalMove1.textContent = obj[rivalId].moves[0]
