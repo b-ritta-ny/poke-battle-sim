@@ -121,8 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.moves[1].move.name,
         data.moves[2].move.name,
         data.moves[3].move.name,
-      ]
-
+      ],
     }
 
 // previous fetch requests -- have to manually duplicate for each new pokemon
@@ -152,14 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   console.log(pokeObj)
 
-  battlePoke(1, 4)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       console.log('I was reset')
-      document.querySelector('yourPokeHP').innerText = 100
-      document.querySelector('rivalPokeHP').innerText = 100
+      document.querySelector('#yourPokeHP').innerText = 100
+      document.querySelector('#rivalPokeHP').innerText = 100
     }
   })
+
   //form submission event handler (keep this commented out code!!!)
 
 
@@ -194,5 +193,4 @@ document.addEventListener('DOMContentLoaded', () => {
     battlePoke(yourInput, rivalInput, pokeObj);
   };
   battleForm.addEventListener('submit', handleSubmit); 
-    
 })
