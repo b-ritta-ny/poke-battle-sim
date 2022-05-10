@@ -11,12 +11,6 @@ const renderPoke = (obj, id) => {
   pokeId.className = 'idNum'
   pokeImg.src = obj[id].img
 
-//   if (data.id === 4)
-//     pokeImg.src = data.sprites.front_default
-//   else if (data.id === 7)
-//     pokeImg.src = data.sprites.front_default
-//   else if (data.id === 1)
-//     pokeImg.src = data.sprites.front_default
   pokeList.append(pokeH1, pokeImg)
   pokeH1.appendChild(pokeId)
 }
@@ -48,7 +42,6 @@ const battlePoke = (yourId, rivalId, obj) => {
                 return Math.floor(Math.random() * (max - min + 1) + min)
             }
             const rndInt = randomIntFromInterval(0, 3)
-            console.log(rndInt)
             const rivalMove = rivalMovesArray[rndInt].textContent
 
             const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
@@ -64,68 +57,74 @@ const battlePoke = (yourId, rivalId, obj) => {
         })
     }
 
-    const yourImg = document.createElement('img')
-    yourImg.src = obj[yourId].img
-    yourImg.className = 'choosePkmn'
 
-    const rivalImg = document.createElement('img')
-    rivalImg.src = obj[rivalId].img
-    rivalImg.className = 'choosePkmn'
 
-    const yourName = document.querySelector('#yourPokeName')
-    yourName.textContent = obj[yourId].name
-    yourName.className = 'pkmn'
-    yourName.append(yourImg)
 
-    const yourMove1 = document.querySelector('#yourPokeMove1')
-    yourMove1.textContent = obj[yourId].moves[0]
+  const yourImg = document.createElement('img')
+  yourImg.src = obj[yourId].img
+  yourImg.className = 'choosePkmn'
+  yourImg.id = 'yourPkmnBattler'
 
-    const yourMove2 = document.querySelector('#yourPokeMove2')
-    yourMove2.textContent = obj[yourId].moves[1]
+  const rivalImg = document.createElement('img')
+  rivalImg.src = obj[rivalId].img
+  rivalImg.className = 'choosePkmn'
+  rivalImg.id = 'rivalPkmnBattler'
 
-    const yourMove3 = document.querySelector('#yourPokeMove3')
-    yourMove3.textContent = obj[yourId].moves[2]
+  const yourName = document.querySelector('#yourPokeName')
+  yourName.textContent = obj[yourId].name
+  yourName.className = 'pkmn'
+  yourName.append(yourImg)
 
-    const yourMove4 = document.querySelector('#yourPokeMove4')
-    yourMove4.textContent = obj[yourId].moves[3]
+  const yourMove1 = document.querySelector('#yourPokeMove1')
+  yourMove1.textContent = obj[yourId].moves[0]
 
-    const rivalName = document.querySelector('#rivalPokeName')
-    rivalName.textContent = obj[rivalId].name
-    rivalName.className = 'pkmn'
-    rivalName.append(rivalImg)
+  const yourMove2 = document.querySelector('#yourPokeMove2')
+  yourMove2.textContent = obj[yourId].moves[1]
 
-    const rivalMove1 = document.querySelector('#rivalPokeMove1')
-    rivalMove1.textContent = obj[rivalId].moves[0]
+  const yourMove3 = document.querySelector('#yourPokeMove3')
+  yourMove3.textContent = obj[yourId].moves[2]
 
-    const rivalMove2 = document.querySelector('#rivalPokeMove2')
-    rivalMove2.textContent = obj[rivalId].moves[1]
+  const yourMove4 = document.querySelector('#yourPokeMove4')
+  yourMove4.textContent = obj[yourId].moves[3]
 
-    const rivalMove3 = document.querySelector('#rivalPokeMove3')
-    rivalMove3.textContent = obj[rivalId].moves[2]
+  const rivalName = document.querySelector('#rivalPokeName')
+  rivalName.textContent = obj[rivalId].name
+  rivalName.className = 'pkmn'
+  rivalName.append(rivalImg)
 
-    const rivalMove4 = document.querySelector('#rivalPokeMove4')
-    rivalMove4.textContent = obj[rivalId].moves[3]
+  const rivalMove1 = document.querySelector('#rivalPokeMove1')
+  rivalMove1.textContent = obj[rivalId].moves[0]
 
-    const yourMovesArray = [yourMove1, yourMove2, yourMove3, yourMove4]
-    const rivalMovesArray = [rivalMove1, rivalMove2, rivalMove3, rivalMove4]
+  const rivalMove2 = document.querySelector('#rivalPokeMove2')
+  rivalMove2.textContent = obj[rivalId].moves[1]
 
-    yourMovesArray.forEach(move=>addClick(move))
+  const rivalMove3 = document.querySelector('#rivalPokeMove3')
+  rivalMove3.textContent = obj[rivalId].moves[2]
+
+  const rivalMove4 = document.querySelector('#rivalPokeMove4')
+  rivalMove4.textContent = obj[rivalId].moves[3]
+
+  const yourMovesArray = [yourMove1, yourMove2, yourMove3, yourMove4]
+  const rivalMovesArray = [rivalMove1, rivalMove2, rivalMove3, rivalMove4]
+
+  yourMovesArray.forEach(move => addClick(move))
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const pokeObj = {}
-    const addPokeObj = (data) => {
-        pokeObj[data.id] = {
-            name: data.name, 
-            img: data.sprites.front_default,
-            moves: [
-                data.moves[0].move.name,
-                data.moves[1].move.name,
-                data.moves[2].move.name,
-                data.moves[3].move.name,
-            ]
-        }
+  const pokeObj = {}
+  const addPokeObj = (data) => {
+    pokeObj[data.id] = {
+      name: data.name,
+      img: data.sprites.front_default,
+      moves: [
+        data.moves[0].move.name,
+        data.moves[1].move.name,
+        data.moves[2].move.name,
+        data.moves[3].move.name,
+      ]
+
     }
+
 // previous fetch requests -- have to manually duplicate for each new pokemon
 //   fetch('https://pokeapi.co/api/v2/pokemon/1')
 //     .then((resp) => resp.json())
@@ -150,13 +149,20 @@ document.addEventListener('DOMContentLoaded', () => {
 //       battlePoke(7, 4, pokeObj)
 //     })
 
-    
-    
 
-  //form submission event handler
-  const battleForm = document.querySelector('#battleBtn')
-  //battleBtn.addEventListener('click', handleSubmit)
-  const handleSubmit = () => { }
+  console.log(pokeObj)
+
+  battlePoke(1, 4)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      console.log('I was reset')
+      document.querySelector('yourPokeHP').innerText = 100
+      document.querySelector('rivalPokeHP').innerText = 100
+    }
+  })
+  //form submission event handler (keep this commented out code!!!)
+
+
 
 
 
@@ -177,6 +183,16 @@ document.addEventListener('DOMContentLoaded', () => {
   Promise.all(fetchArray)
   .then(values=>{
       for(const id in pokeObj) {renderPoke(pokeObj, id)}
-      battlePoke(3, 6, pokeObj)
+      // test => battlePoke(3, 6, pokeObj)
     })
+
+     const battleForm = document.querySelector('#choosePkmn')
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const yourInput = document.querySelector('#yourEntry').value
+    const rivalInput = document.querySelector('#rivalEntry').value
+    battlePoke(yourInput, rivalInput, pokeObj);
+  };
+  battleForm.addEventListener('submit', handleSubmit); 
+    
 })
