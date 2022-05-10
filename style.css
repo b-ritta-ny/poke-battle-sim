@@ -1,109 +1,124 @@
 /* stolen from the ramen lab to get some ideas hehehe */
-  title {
-    display: hidden;
-  }
+title {
+  display: hidden;
+}
 
-  body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    /* box-sizing: border-box; */
-    display: inline-block;
-    padding: 1rem;
-    text-align: center;
-    background-color: #fafafa;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  header {
-    font-size: xx-large;
-    padding: 0.5rem;
-    width: 100%;
-    color: white;
-    background-color: black;
-  }
-  
- 
-  label {
-    margin: 0;
-    padding-right: 0.5em;
-    padding-left: inherit;
-    font-family: Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
-  }
-  
-  #pokeList {
-    display: flex;
-    overflow-x: auto;
-    margin: 1rem 0;
-    max-width: calc(100vw - 2rem);
-  }
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+  /* box-sizing: border-box; */
+  display: inline-block;
+  padding: 1rem;
+  text-align: center;
+  background-color: #fafafa;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+header {
+  font-size: xx-large;
+  padding: 0.5rem;
+  width: 100%;
+  color: white;
+  background-color: black;
+}
 
 
-  #pokeList img {
-    flex: 0 1 auto;
-    height: 150px;
-    margin-right: 0.5rem;
-    cursor: pointer;
-  }
-  
-  #pokeList img:last-child {
-    margin-right: 0;
-  }
-  
-  
-  #yourPokeDiv {
-    align-self: baseline;
-  }
+label {
+  margin: 0;
+  padding-right: 0.5em;
+  padding-left: inherit;
+  font-family: Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
+}
 
-  #rivalPokeDiv {
-    align-self: end;
-  }
+#pokeList {
+  display: flex;
+  overflow-x: auto;
+  margin: 1rem 0;
+  max-width: calc(100vw - 2rem);
+}
 
-  .detail-image {
-    height: 350px;
-  }
-  
-  
 
-  form#choosePkmn {
-    margin: 1rem 0;
-    padding: inherit;
-    width: 495px;
-    display: flex;
-    flex-direction: row;
-    align-items: normal;
-  }
-  
-  input,
-  textarea {
-    font-size: 1rem;
-    border: 1px solid black;
-    background-color: white;
-    padding: 0.5rem;
-    margin: 0.25rem 0;
-    width: 100%;
-  }
-  
-  input[type="submit"] {
-    color: white;
-    border: 1px solid white;
-    background-color: black;
-    cursor: pointer;
-    transition: all 0.3s;
-  }
-  
-  input[type="submit"]:active {
-    background-color: gray;
-  }
-  
-  form h4 {
-    width: 100%;
-    padding: 0.25rem;
-    margin: 0.5rem 0;
-    color: white;
-    background-color: black;
-  }
-  
+#pokeList img {
+  flex: 0 1 auto;
+  height: 150px;
+  margin-right: 0.5rem;
+  cursor: pointer;
+}
+
+#pokeList img:last-child {
+  margin-right: 0;
+}
+
+
+#yourPokeDiv {
+  align-self: baseline;
+}
+
+#rivalPokeDiv {
+  align-self: end;
+}
+
+/* .idNum {
+  position: absolute;
+  margin-top: 1.5em;
+  margin-left: 18em;
+} */
+
+.detail-image {
+  height: 350px;
+}
+
+
+
+form#choosePkmn {
+  margin: 1rem 0;
+  padding: inherit;
+  width: 495px;
+  display: flex;
+  flex-direction: row;
+  align-items: normal;
+}
+
+input,
+textarea {
+  font-size: 1rem;
+  border: 1px solid black;
+  background-color: white;
+  padding: 0.5rem;
+  margin: 0.25rem 0;
+  width: 100%;
+}
+
+input[type="submit"] {
+  color: white;
+  border: 1px solid white;
+  background-color: black;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+input[type="submit"]:active {
+  background-color: gray;
+}
+
+form h4 {
+  width: 100%;
+  padding: 0.25rem;
+  margin: 0.5rem 0;
+  color: white;
+  background-color: black;
+}
+
+h2.idNum {
+  font-size: x-large;
+  margin-top: 0;
+}
+
+img.choosePkmn {
+  padding-right: 3em;
+  padding-left: 1rem;
+}
