@@ -98,11 +98,6 @@ const battlePoke = (yourId, rivalId) => {
   pokeH1.appendChild(pokeId)
 }
 
-//form submission event handler
-const battleBtn = document.querySelector('#battleBtn')
-//battleBtn.addEventListener('click', handleSubmit)
-const handleSubmit = () => { }
-
 document.addEventListener('DOMContentLoaded', () => {
   const pokeObj = {}
   const addPokeObj = (data) => {
@@ -142,7 +137,13 @@ document.addEventListener('DOMContentLoaded', () => {
   battlePoke(1, 4)
 
   //form submission event handler
-  const battleForm = document.querySelector('#battleBtn')
-  //battleBtn.addEventListener('click', handleSubmit)
-  const handleSubmit = () => { }
+  const battleForm = document.querySelector('#choosePkmn')
+
+  battleForm.addEventListener('click', handleSubmit)
+  const handleSubmit = () => {
+    battleForm.preventDefault();
+    battlePoke;
+    console.log(battleForm.value)
+  }
+
 })
