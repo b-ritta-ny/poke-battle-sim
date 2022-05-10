@@ -1,80 +1,74 @@
-const renderPoke = (data) => {
+const renderPoke = (obj, id) => {    
   const pokeList = document.querySelector('#pokeList')
-
   const pokeH1 = document.createElement('h1')
   const pokeImg = document.createElement('img')
   const pokeId = document.createElement('h2')
 
   pokeImg.className = 'choosePkmn'
-  pokeH1.innerText = data.name
+  pokeH1.innerText = obj[id].name
   pokeH1.className = 'pkmn'
-  pokeId.innerHTML = `<br>${data.id}`
+  pokeId.innerHTML = `<br>${id}`
   pokeId.className = 'idNum'
+  pokeImg.src = obj[id].img
 
-  if (data.id === 4) pokeImg.src = data.sprites.front_default
-  else if (data.id === 7) pokeImg.src = data.sprites.front_default
-  else if (data.id === 1) pokeImg.src = data.sprites.front_default
-
-  pokeList.append(pokeH1, pokeId, pokeImg)
+  pokeList.append(pokeH1, pokeImg)
+  pokeH1.appendChild(pokeId)
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
-  console.log(obj)
+    const addClick = (move) => {
+        move.addEventListener('click', ()=>{
+            // adding text under your div that says what move you used
+            const yourPokeDiv = document.querySelector('#yourPokeDiv')
+            const div = document.createElement('div')
+            div.textContent = `You used ${move.textContent}!`
+            yourPokeDiv.append(div)
 
-  const addClick = (move) => {
-    console.log(move)
-    move.addEventListener('click', () => {
-      // adding text under your div that says what move you used
-      const yourPokeDiv = document.querySelector('#yourPokeDiv')
-      const div = document.createElement('div')
-      div.textContent = `You used ${move.textContent}!`
-      yourPokeDiv.append(div)
+            // subtracting rival's HP
+            const rivalHP = document.querySelector('#rivalPokeHP')
+            let numHP = parseInt(rivalHP.textContent)
+            if(numHP > 0){numHP -= 20}
+            if(numHP === 0){
+                rivalHP.style.color = 'red'
+                const form = document.querySelector('#choosePkmn')
+                const winningH1 = document.createElement('h1')
+                winningH1.textContent = 'YOU WON!!'
+                form.append(winningH1)
+            }
+            rivalHP.textContent = numHP
 
-      // subtracting rival's HP
-      const rivalHP = document.querySelector('#rivalPokeHP')
-      let numHP = parseInt(rivalHP.textContent)
-      if (numHP > 0) {
-        numHP -= 20
-      }
-      if (numHP === 0) {
-        rivalHP.style.color = 'red'
-        const form = document.querySelector('#choosePkmn')
-        const winningH1 = document.createElement('h1')
-        winningH1.textContent = 'YOU WON!!'
-        form.append(winningH1)
-      }
-      rivalHP.textContent = numHP
+            // rival move
+            function randomIntFromInterval(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min)
+            }
+            const rndInt = randomIntFromInterval(0, 3)
+            const rivalMove = rivalMovesArray[rndInt].textContent
 
-      // rival move
-      function randomIntFromInterval(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min)
-      }
-      const rndInt = randomIntFromInterval(0, 3)
-      console.log(rndInt)
-      const rivalMove = rivalMovesArray[rndInt].textContent
+            const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
+            const rivalDiv = document.createElement('div')
+            rivalDiv.textContent = `Rival used ${rivalMove}!`
+            rivalPokeDiv.append(rivalDiv)
 
-      const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
-      const rivalDiv = document.createElement('div')
-      rivalDiv.textContent = `Rival used ${rivalMove}!`
-      rivalPokeDiv.append(rivalDiv)
+            // subtracting your HP
+            const yourHP = document.querySelector('#yourPokeHP')
+            let yourNumHP = parseInt(yourHP.textContent)
+            if(yourNumHP > 0){yourNumHP -= 10}
+            yourHP.textContent = yourNumHP
+        })
+    }
 
-      // subtracting your HP
-      const yourHP = document.querySelector('#yourPokeHP')
-      let yourNumHP = parseInt(yourHP.textContent)
-      if (yourNumHP > 0) {
-        yourNumHP -= 10
-      }
-      yourHP.textContent = yourNumHP
-    })
-  }
+
+
 
   const yourImg = document.createElement('img')
   yourImg.src = obj[yourId].img
   yourImg.className = 'choosePkmn'
+  yourImg.id = 'yourPkmnBattler'
 
   const rivalImg = document.createElement('img')
   rivalImg.src = obj[rivalId].img
   rivalImg.className = 'choosePkmn'
+  rivalImg.id = 'rivalPkmnBattler'
 
   const yourName = document.querySelector('#yourPokeName')
   yourName.textContent = obj[yourId].name
@@ -113,7 +107,7 @@ const battlePoke = (yourId, rivalId, obj) => {
   const yourMovesArray = [yourMove1, yourMove2, yourMove3, yourMove4]
   const rivalMovesArray = [rivalMove1, rivalMove2, rivalMove3, rivalMove4]
 
-  yourMovesArray.forEach((move) => addClick(move))
+  yourMovesArray.forEach(move => addClick(move))
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -129,29 +123,31 @@ document.addEventListener('DOMContentLoaded', () => {
         data.moves[3].move.name,
       ],
     }
-  }
-  fetch('https://pokeapi.co/api/v2/pokemon/1')
-    .then((resp) => resp.json())
-    .then((data) => {
-      addPokeObj(data)
-      renderPoke(data)
-    })
 
-  fetch('https://pokeapi.co/api/v2/pokemon/4')
-    .then((resp) => resp.json())
-    .then((data) => {
-      addPokeObj(data)
-      renderPoke(data)
-    })
+// previous fetch requests -- have to manually duplicate for each new pokemon
+//   fetch('https://pokeapi.co/api/v2/pokemon/1')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//         addPokeObj(data)
+//         renderPoke(data)
+//     })
 
-  fetch('https://pokeapi.co/api/v2/pokemon/7')
-    .then((resp) => resp.json())
-    .then((data) => {
-      addPokeObj(data)
-      renderPoke(data)
-      console.log(pokeObj[1].name)
-      battlePoke(7, 4, pokeObj)
-    })
+//   fetch('https://pokeapi.co/api/v2/pokemon/4')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//         addPokeObj(data)
+//         renderPoke(data)
+//     })
+
+//   fetch('https://pokeapi.co/api/v2/pokemon/7')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//       addPokeObj(data)
+//       renderPoke(data)
+//       console.log(pokeObj[1].name)
+//       battlePoke(7, 4, pokeObj)
+//     })
+
 
   console.log(pokeObj)
 
@@ -162,4 +158,39 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#rivalPokeHP').innerText = 100
     }
   })
+
+  //form submission event handler (keep this commented out code!!!)
+
+
+
+
+
+  // testing multiple fetch request loop
+  let fetchArray = []
+  const loopFetch = maxId => {
+    let id = 1
+    while(id <= maxId){
+        fetchArray.push(fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then((resp) => resp.json())
+        .then((data) => {
+            addPokeObj(data)
+        }))
+    id++}
+  }
+  loopFetch(9)
+  
+  Promise.all(fetchArray)
+  .then(values=>{
+      for(const id in pokeObj) {renderPoke(pokeObj, id)}
+      // test => battlePoke(3, 6, pokeObj)
+    })
+
+     const battleForm = document.querySelector('#choosePkmn')
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const yourInput = document.querySelector('#yourEntry').value
+    const rivalInput = document.querySelector('#rivalEntry').value
+    battlePoke(yourInput, rivalInput, pokeObj);
+  };
+  battleForm.addEventListener('submit', handleSubmit); 
 })
