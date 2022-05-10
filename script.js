@@ -20,6 +20,10 @@ const renderPoke = (data) => {
   //pokeList.append(h1, pokeId, pokeImg)
 }
 
+// const handleReset = () => {
+
+// }
+
 const battlePoke = (yourId, rivalId) => {
   //grabbing html elements
   const yourName = document.querySelector('#yourPokeName')
@@ -85,17 +89,17 @@ const battlePoke = (yourId, rivalId) => {
     rivalMove4.textContent = 'hydro pump'
   }
 
-  if (data.id === 4)
-    pokeImg.src =
-      'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/d/d4/Charmander.gif'
-  else if (data.id === 7)
-    pokeImg.src =
-      'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/a/a3/Squirtle.gif'
-  else if (data.id === 1)
-    pokeImg.src =
-      'https://png.pngitem.com/pimgs/s/130-1306754_pokemon-bulbasaur-hd-png-download.png'
-  pokeList.append(pokeH1, pokeImg)
-  pokeH1.appendChild(pokeId)
+  //   if (data.id === 4)
+  //     pokeImg.src =
+  //       'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/d/d4/Charmander.gif'
+  //   else if (data.id === 7)
+  //     pokeImg.src =
+  //       'https://oyster.ignimgs.com/mediawiki/apis.ign.com/pokemon-blue-version/a/a3/Squirtle.gif'
+  //   else if (data.id === 1)
+  //     pokeImg.src =
+  //       'https://png.pngitem.com/pimgs/s/130-1306754_pokemon-bulbasaur-hd-png-download.png'
+  //   pokeList.append(pokeH1, pokeImg)
+  //   pokeH1.appendChild(pokeId)
 }
 
 //form submission event handler
@@ -137,6 +141,14 @@ document.addEventListener('DOMContentLoaded', () => {
       addPokeObj(data)
       renderPoke(data)
     })
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      console.log('I was reset')
+      document.querySelector('yourPokeHP').innerText = 100
+      document.querySelector('rivalPokeHP').innerText = 100
+    }
+  })
 
   console.log(pokeObj)
   battlePoke(1, 4)
