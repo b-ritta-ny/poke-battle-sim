@@ -136,7 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
   console.log(pokeObj)
   battlePoke(1, 4)
 
-  //form submission event handler
+  //form submission event handler (keep this commented out code!!!)
+
   // const battleForm = document.querySelector('#choosePkmn')
 
   // battleForm.addEventListener('click', handleSubmit)
