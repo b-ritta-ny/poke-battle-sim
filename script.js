@@ -1,4 +1,6 @@
-const renderPoke = (data) => {
+const renderPoke = (obj, id) => {
+    console.log(id)
+    
   const pokeList = document.querySelector('#pokeList')
 
   const pokeH1 = document.createElement('h1')
@@ -6,18 +8,20 @@ const renderPoke = (data) => {
   const pokeId = document.createElement('h2')
 
   pokeImg.className = 'choosePkmn'
-  pokeH1.innerText = data.name
+  pokeH1.innerText = obj[id].name
   pokeH1.className = 'pkmn'
-  pokeId.innerHTML = `<br>${data.id}`
+  pokeId.innerHTML = `<br>${id}`
   pokeId.className = 'idNum'
+  pokeImg.src = obj[id].img
 
-  if (data.id === 4)
-    pokeImg.src = data.sprites.front_default
-  else if (data.id === 7)
-    pokeImg.src = data.sprites.front_default
-  else if (data.id === 1)
-    pokeImg.src = data.sprites.front_default
-  pokeList.append(pokeH1, pokeId, pokeImg)
+//   if (data.id === 4)
+//     pokeImg.src = data.sprites.front_default
+//   else if (data.id === 7)
+//     pokeImg.src = data.sprites.front_default
+//   else if (data.id === 1)
+//     pokeImg.src = data.sprites.front_default
+  pokeList.append(pokeH1, pokeImg)
+  pokeH1.appendChild(pokeId)
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
@@ -134,28 +138,28 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         }
     }
-  fetch('https://pokeapi.co/api/v2/pokemon/1')
-    .then((resp) => resp.json())
-    .then((data) => {
-        addPokeObj(data)
-        renderPoke(data)
-    })
+//   fetch('https://pokeapi.co/api/v2/pokemon/1')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//         addPokeObj(data)
+//         renderPoke(data)
+//     })
 
-  fetch('https://pokeapi.co/api/v2/pokemon/4')
-    .then((resp) => resp.json())
-    .then((data) => {
-        addPokeObj(data)
-        renderPoke(data)
-    })
+//   fetch('https://pokeapi.co/api/v2/pokemon/4')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//         addPokeObj(data)
+//         renderPoke(data)
+//     })
 
-  fetch('https://pokeapi.co/api/v2/pokemon/7')
-    .then((resp) => resp.json())
-    .then((data) => {
-      addPokeObj(data)
-      renderPoke(data)
-      console.log(pokeObj[1].name)
-      battlePoke(7, 4, pokeObj)
-    })
+//   fetch('https://pokeapi.co/api/v2/pokemon/7')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//       addPokeObj(data)
+//       renderPoke(data)
+//       console.log(pokeObj[1].name)
+//       battlePoke(7, 4, pokeObj)
+//     })
 
     
     
@@ -164,4 +168,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const battleForm = document.querySelector('#battleBtn')
   //battleBtn.addEventListener('click', handleSubmit)
   const handleSubmit = () => { }
+
+
+
+  // testing multiple fetch request loop
+  let fetchArray = []
+  const loopFetch = maxId => {
+    let id = 1
+    while(id < maxId){
+        fetchArray.push(fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then((resp) => resp.json())
+        .then((data) => {
+            addPokeObj(data)
+        }))
+    id++}
+  }
+  loopFetch(51)
+  console.log(pokeObj)
+  
+  Promise.all(fetchArray)
+  .then(values=>{
+      for(const id in pokeObj) {renderPoke(pokeObj, id)}
+      battlePoke(3, 6, pokeObj)
+    })
 })
