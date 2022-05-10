@@ -1,8 +1,5 @@
-const renderPoke = (obj, id) => {
-    console.log(id)
-    
+const renderPoke = (obj, id) => {    
   const pokeList = document.querySelector('#pokeList')
-
   const pokeH1 = document.createElement('h1')
   const pokeImg = document.createElement('img')
   const pokeId = document.createElement('h2')
@@ -25,10 +22,7 @@ const renderPoke = (obj, id) => {
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
-    console.log(obj)
-
     const addClick = (move) => {
-        console.log(move)
         move.addEventListener('click', ()=>{
             // adding text under your div that says what move you used
             const yourPokeDiv = document.querySelector('#yourPokeDiv')
@@ -118,12 +112,6 @@ const battlePoke = (yourId, rivalId, obj) => {
     yourMovesArray.forEach(move=>addClick(move))
 }
 
-
-//form submission event handler
-const battleBtn = document.querySelector('#battleBtn')
-//battleBtn.addEventListener('click', handleSubmit)
-const handleSubmit = () => {}
-
 document.addEventListener('DOMContentLoaded', () => {
     const pokeObj = {}
     const addPokeObj = (data) => {
@@ -138,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         }
     }
+// previous fetch requests -- have to manually duplicate for each new pokemon
 //   fetch('https://pokeapi.co/api/v2/pokemon/1')
 //     .then((resp) => resp.json())
 //     .then((data) => {
@@ -175,7 +164,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let fetchArray = []
   const loopFetch = maxId => {
     let id = 1
-    while(id < maxId){
+    while(id <= maxId){
         fetchArray.push(fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
         .then((resp) => resp.json())
         .then((data) => {
@@ -183,8 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }))
     id++}
   }
-  loopFetch(51)
-  console.log(pokeObj)
+  loopFetch(9)
   
   Promise.all(fetchArray)
   .then(values=>{
