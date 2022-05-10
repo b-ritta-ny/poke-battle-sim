@@ -20,6 +20,11 @@ const renderPoke = (data) => {
   pokeList.append(h1, pokeId, pokeImg)
 }
 
+//form submission event handler
+const battleBtn = document.querySelector('#battleBtn')
+battleBtn.addEventListener('click', handleSubmit)
+const handleSubmit = () => {}
+
 document.addEventListener('DOMContentLoaded', () => {
   fetch('https://pokeapi.co/api/v2/pokemon/1')
     .then((resp) => resp.json())

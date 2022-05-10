@@ -2,34 +2,32 @@
 <html lang="en">
 
 <head>
-    <title>Poke Battle Sim</title>
+    <title>Poké Battle Sim</title>
     <link rel="stylesheet" href="style.css">
     <script type="text/javascript" src="script.js"></script>
 </head>
 
 <body>
     <!--Title of the Project-->
-    <h1>Pokemon Battle Sim</h1>
+    <header><b>Pokémon Battle Sim</b></header>
 
-    <!--List of Pokemon to chose from (photo/name/ID)-->
+
+    <!--List of Pokémon to chose from (photo/name/ID)-->
     <div id="pokeList"></div>
-    <!--img id="bulbasaur" src="" alt="oops" />
-    <img id="charmander" src="" alt="oops" />
-    <img id="squirtle" src="" alt="oops" /-->
-    
-    
-    <!--Form to choose your Pokemon-->
-    <form>
-        <label for="yourPkmn">Your Pokemon ID:</label><br>
+
+    <!--Form to choose your Pokémon-->
+    <form id="choosePkmn">
+        <label for="yourPkmn">Your Pokémon ID:</label><br>
+
         <input type="text" id="idEntry" name="idEntry"><br>
-        <label for="vsPkmn">Rival Pokemon ID:</label><br>
+        <label for="vsPkmn">Rival Pokémon ID:</label><br>
         <input type="text" id="idEntry" name="idEntry">
-        <input type="submit" id="submit">
+        <input type="submit" id="submit" value="Battle">
     </form>
 
     <!--Battle Setup-->
-    <div id="yourPokeDiv">
-        <h1 id="yourPokeName">Your Pokemon</h1>
+    <div class="battlers" id="yourPokeDiv">
+        <h1 id="yourPokeName">Your<br>Pokémon</h1>
         <h2 id="yourPokeHP">100</h2>
         <div id="yourPokeMoves">
             <button id="yourPokeMove1">move 1</button>
@@ -38,8 +36,8 @@
             <button id="yourPokeMove4">move 4</button>
         </div>
     </div>
-    <div id="rivalPokeDiv">
-        <h1 id="rivalPokeName">Rival Pokemon</h1>
+    <div class="battlers" id="rivalPokeDiv">
+        <h1 id="rivalPokeName">Rival<br>Pokémon</h1>
         <h2 id="rivalPokeHP">100</h2>
         <div id="rivalPokeMoves">
             <button id="rivalPokeMove1">move 1</button>
