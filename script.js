@@ -17,6 +17,7 @@ const renderPoke = (data) => {
     pokeImg.src = data.sprites.front_default
   else if (data.id === 1)
     pokeImg.src = data.sprites.front_default
+
   pokeList.append(pokeH1, pokeId, pokeImg)
 }
 
@@ -114,38 +115,32 @@ const battlePoke = (yourId, rivalId, obj) => {
     yourMovesArray.forEach(move=>addClick(move))
 }
 
-
-//form submission event handler
-const battleBtn = document.querySelector('#battleBtn')
-//battleBtn.addEventListener('click', handleSubmit)
-const handleSubmit = () => {}
-
 document.addEventListener('DOMContentLoaded', () => {
-    const pokeObj = {}
-    const addPokeObj = (data) => {
-        pokeObj[data.id] = {
-            name: data.name, 
-            img: data.sprites.front_default,
-            moves: [
-                data.moves[0].move.name,
-                data.moves[1].move.name,
-                data.moves[2].move.name,
-                data.moves[3].move.name,
-            ]
-        }
+  const pokeObj = {}
+  const addPokeObj = (data) => {
+    pokeObj[data.id] = {
+      name: data.name,
+      img: data.sprites.front_default,
+      moves: [
+        data.moves[0].move.name,
+        data.moves[1].move.name,
+        data.moves[2].move.name,
+        data.moves[3].move.name,
+      ]
     }
+  }
   fetch('https://pokeapi.co/api/v2/pokemon/1')
     .then((resp) => resp.json())
     .then((data) => {
-        addPokeObj(data)
-        renderPoke(data)
+      addPokeObj(data)
+      renderPoke(data)
     })
 
   fetch('https://pokeapi.co/api/v2/pokemon/4')
     .then((resp) => resp.json())
     .then((data) => {
-        addPokeObj(data)
-        renderPoke(data)
+      addPokeObj(data)
+      renderPoke(data)
     })
 
   fetch('https://pokeapi.co/api/v2/pokemon/7')
@@ -157,11 +152,20 @@ document.addEventListener('DOMContentLoaded', () => {
       battlePoke(7, 4, pokeObj)
     })
 
-    
-    
 
-  //form submission event handler
-  const battleForm = document.querySelector('#battleBtn')
-  //battleBtn.addEventListener('click', handleSubmit)
-  const handleSubmit = () => { }
+  console.log(pokeObj)
+  battlePoke(1, 4)
+
+  //form submission event handler (keep this commented out code!!!)
+
+  // const battleForm = document.querySelector('#choosePkmn')
+
+  // battleForm.addEventListener('click', handleSubmit)
+  // const handleSubmit = () => {
+  //   battleForm.preventDefault();
+  //   battlePoke;
+  //   console.log(battleForm.value)
+  // }
+
+
 })
