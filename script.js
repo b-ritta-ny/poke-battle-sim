@@ -22,7 +22,7 @@ const renderPoke = (data) => {
 
 //form submission event handler
 const battleBtn = document.querySelector('#battleBtn')
-battleBtn.addEventListener('click', handleSubmit)
+//battleBtn.addEventListener('click', handleSubmit)
 const handleSubmit = () => {}
 
 document.addEventListener('DOMContentLoaded', () => {
