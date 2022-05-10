@@ -18,101 +18,102 @@ const renderPoke = (data) => {
   else if (data.id === 1)
     pokeImg.src = data.sprites.front_default
 
-  pokeList.append(pokeH1, pokeId, pokeImg)
+  pokeList.append(pokeH1, pokeImg)
+  pokeH1.appendChild(pokeId)
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
-    console.log(obj)
+  console.log(obj)
 
-    const addClick = (move) => {
-        console.log(move)
-        move.addEventListener('click', ()=>{
-            // adding text under your div that says what move you used
-            const yourPokeDiv = document.querySelector('#yourPokeDiv')
-            const div = document.createElement('div')
-            div.textContent = `You used ${move.textContent}!`
-            yourPokeDiv.append(div)
+  const addClick = (move) => {
+    console.log(move)
+    move.addEventListener('click', () => {
+      // adding text under your div that says what move you used
+      const yourPokeDiv = document.querySelector('#yourPokeDiv')
+      const div = document.createElement('div')
+      div.textContent = `You used ${move.textContent}!`
+      yourPokeDiv.append(div)
 
-            // subtracting rival's HP
-            const rivalHP = document.querySelector('#rivalPokeHP')
-            let numHP = parseInt(rivalHP.textContent)
-            if(numHP > 0){numHP -= 20}
-            if(numHP === 0){
-                rivalHP.style.color = 'red'
-                const form = document.querySelector('#choosePkmn')
-                const winningH1 = document.createElement('h1')
-                winningH1.textContent = 'YOU WON!!'
-                form.append(winningH1)
-            }
-            rivalHP.textContent = numHP
+      // subtracting rival's HP
+      const rivalHP = document.querySelector('#rivalPokeHP')
+      let numHP = parseInt(rivalHP.textContent)
+      if (numHP > 0) { numHP -= 20 }
+      if (numHP === 0) {
+        rivalHP.style.color = 'red'
+        const form = document.querySelector('#choosePkmn')
+        const winningH1 = document.createElement('h1')
+        winningH1.textContent = 'YOU WON!!'
+        form.append(winningH1)
+      }
+      rivalHP.textContent = numHP
 
-            // rival move
-            function randomIntFromInterval(min, max) {
-                return Math.floor(Math.random() * (max - min + 1) + min)
-            }
-            const rndInt = randomIntFromInterval(0, 3)
-            console.log(rndInt)
-            const rivalMove = rivalMovesArray[rndInt].textContent
+      // rival move
+      function randomIntFromInterval(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min)
+      }
+      const rndInt = randomIntFromInterval(0, 3)
+      console.log(rndInt)
+      const rivalMove = rivalMovesArray[rndInt].textContent
 
-            const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
-            const rivalDiv = document.createElement('div')
-            rivalDiv.textContent = `Rival used ${rivalMove}!`
-            rivalPokeDiv.append(rivalDiv)
+      const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
+      const rivalDiv = document.createElement('div')
+      rivalDiv.textContent = `Rival used ${rivalMove}!`
+      rivalPokeDiv.append(rivalDiv)
 
-            // subtracting your HP
-            const yourHP = document.querySelector('#yourPokeHP')
-            let yourNumHP = parseInt(yourHP.textContent)
-            if(yourNumHP > 0){yourNumHP -= 10}
-            yourHP.textContent = yourNumHP
-        })
-    }
+      // subtracting your HP
+      const yourHP = document.querySelector('#yourPokeHP')
+      let yourNumHP = parseInt(yourHP.textContent)
+      if (yourNumHP > 0) { yourNumHP -= 10 }
+      yourHP.textContent = yourNumHP
+    })
+  }
 
-    const yourImg = document.createElement('img')
-    yourImg.src = obj[yourId].img
-    yourImg.className = 'choosePkmn'
+  const yourImg = document.createElement('img')
+  yourImg.src = obj[yourId].img
+  yourImg.className = 'choosePkmn'
 
-    const rivalImg = document.createElement('img')
-    rivalImg.src = obj[rivalId].img
-    rivalImg.className = 'choosePkmn'
+  const rivalImg = document.createElement('img')
+  rivalImg.src = obj[rivalId].img
+  rivalImg.className = 'choosePkmn'
 
-    const yourName = document.querySelector('#yourPokeName')
-    yourName.textContent = obj[yourId].name
-    yourName.className = 'pkmn'
-    yourName.append(yourImg)
+  const yourName = document.querySelector('#yourPokeName')
+  yourName.textContent = obj[yourId].name
+  yourName.className = 'pkmn'
+  yourName.append(yourImg)
 
-    const yourMove1 = document.querySelector('#yourPokeMove1')
-    yourMove1.textContent = obj[yourId].moves[0]
+  const yourMove1 = document.querySelector('#yourPokeMove1')
+  yourMove1.textContent = obj[yourId].moves[0]
 
-    const yourMove2 = document.querySelector('#yourPokeMove2')
-    yourMove2.textContent = obj[yourId].moves[1]
+  const yourMove2 = document.querySelector('#yourPokeMove2')
+  yourMove2.textContent = obj[yourId].moves[1]
 
-    const yourMove3 = document.querySelector('#yourPokeMove3')
-    yourMove3.textContent = obj[yourId].moves[2]
+  const yourMove3 = document.querySelector('#yourPokeMove3')
+  yourMove3.textContent = obj[yourId].moves[2]
 
-    const yourMove4 = document.querySelector('#yourPokeMove4')
-    yourMove4.textContent = obj[yourId].moves[3]
+  const yourMove4 = document.querySelector('#yourPokeMove4')
+  yourMove4.textContent = obj[yourId].moves[3]
 
-    const rivalName = document.querySelector('#rivalPokeName')
-    rivalName.textContent = obj[rivalId].name
-    rivalName.className = 'pkmn'
-    rivalName.append(rivalImg)
+  const rivalName = document.querySelector('#rivalPokeName')
+  rivalName.textContent = obj[rivalId].name
+  rivalName.className = 'pkmn'
+  rivalName.append(rivalImg)
 
-    const rivalMove1 = document.querySelector('#rivalPokeMove1')
-    rivalMove1.textContent = obj[rivalId].moves[0]
+  const rivalMove1 = document.querySelector('#rivalPokeMove1')
+  rivalMove1.textContent = obj[rivalId].moves[0]
 
-    const rivalMove2 = document.querySelector('#rivalPokeMove2')
-    rivalMove2.textContent = obj[rivalId].moves[1]
+  const rivalMove2 = document.querySelector('#rivalPokeMove2')
+  rivalMove2.textContent = obj[rivalId].moves[1]
 
-    const rivalMove3 = document.querySelector('#rivalPokeMove3')
-    rivalMove3.textContent = obj[rivalId].moves[2]
+  const rivalMove3 = document.querySelector('#rivalPokeMove3')
+  rivalMove3.textContent = obj[rivalId].moves[2]
 
-    const rivalMove4 = document.querySelector('#rivalPokeMove4')
-    rivalMove4.textContent = obj[rivalId].moves[3]
+  const rivalMove4 = document.querySelector('#rivalPokeMove4')
+  rivalMove4.textContent = obj[rivalId].moves[3]
 
-    const yourMovesArray = [yourMove1, yourMove2, yourMove3, yourMove4]
-    const rivalMovesArray = [rivalMove1, rivalMove2, rivalMove3, rivalMove4]
+  const yourMovesArray = [yourMove1, yourMove2, yourMove3, yourMove4]
+  const rivalMovesArray = [rivalMove1, rivalMove2, rivalMove3, rivalMove4]
 
-    yourMovesArray.forEach(move=>addClick(move))
+  yourMovesArray.forEach(move => addClick(move))
 }
 
 document.addEventListener('DOMContentLoaded', () => {
