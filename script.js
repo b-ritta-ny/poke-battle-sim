@@ -23,6 +23,7 @@ const renderPoke = (data) => {
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
+  debugger
   console.log(obj)
 
   const addClick = (move) => {
@@ -68,13 +69,18 @@ const battlePoke = (yourId, rivalId, obj) => {
     })
   }
 
+
+
+
   const yourImg = document.createElement('img')
   yourImg.src = obj[yourId].img
   yourImg.className = 'choosePkmn'
+  yourImg.id = 'yourPkmnBattler'
 
   const rivalImg = document.createElement('img')
   rivalImg.src = obj[rivalId].img
   rivalImg.className = 'choosePkmn'
+  rivalImg.id = 'rivalPkmnBattler'
 
   const yourName = document.querySelector('#yourPokeName')
   yourName.textContent = obj[yourId].name
@@ -150,23 +156,22 @@ document.addEventListener('DOMContentLoaded', () => {
       addPokeObj(data)
       renderPoke(data)
       console.log(pokeObj[1].name)
-      battlePoke(7, 4, pokeObj)
+      //battlePoke(7, 4, pokeObj)
     })
 
 
   console.log(pokeObj)
-  battlePoke(1, 4)
-
-  //form submission event handler (keep this commented out code!!!)
-
-  // const battleForm = document.querySelector('#choosePkmn')
-
-  // battleForm.addEventListener('click', handleSubmit)
-  // const handleSubmit = () => {
-  //   battleForm.preventDefault();
-  //   battlePoke;
-  //   console.log(battleForm.value)
-  // }
 
 
+  const battleForm = document.querySelector('#choosePkmn')
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const yourInput = document.querySelector('#yourEntry').value
+    const rivalInput = document.querySelector('#rivalEntry').value
+    battlePoke(yourInput, rivalInput, pokeObj);
+  };
+  battleForm.addEventListener('submit', handleSubmit);
 })
