@@ -1,13 +1,13 @@
 /* stolen from the ramen lab just to get some ideas */
+title {
+    display: hidden;
+  }
 
-* {
+  body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     /* box-sizing: border-box; */
     display: inline-block;
-  }
-  
-  body {
     padding: 1rem;
     text-align: center;
     background-color: #fafafa;
@@ -24,13 +24,7 @@
     background-color: black;
   }
   
-  #pokeList {
-    display: flex;
-    overflow-x: auto;
-    margin: 1rem 0;
-    max-width: calc(100vw - 2rem);
-  }
-
+ 
   label {
     margin: 0;
     padding-right: 0.5em;
@@ -39,6 +33,14 @@
     box-sizing: border-box;
   }
   
+  #pokeList {
+    display: flex;
+    overflow-x: auto;
+    margin: 1rem 0;
+    max-width: calc(100vw - 2rem);
+  }
+
+
   #pokeList img {
     flex: 0 1 auto;
     height: 150px;
@@ -54,6 +56,14 @@
     position: relative;
   }
   
+  #yourPokeDiv {
+    align-self: baseline;
+  }
+
+  #rivalPokeDiv {
+    align-self: end;
+  }
+
   .detail-image {
     height: 350px;
   }
