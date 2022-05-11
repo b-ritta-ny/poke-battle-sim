@@ -37,10 +37,10 @@ const battlePoke = (yourId, rivalId, obj) => {
         rivalHP.style.color = 'red'
         const form = document.querySelector('#choosePkmn')
         const winningH1 = document.createElement('h1')
-        let escText = document.querySelector('#escape-text')
-        escText.innerHTML = 'press esc key to reset battle!'
         winningH1.textContent = 'YOU WON!!'
         form.append(winningH1)
+        const escText = document.querySelector('#escape-text')
+        escText.innerHTML = 'press esc key to reset battle!'
       }
       rivalHP.textContent = numHP
 
@@ -162,6 +162,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#yourPokeHP').innerText = 100
       document.querySelector('#rivalPokeHP').innerText = 100
       document.querySelector('#rivalPokeHP').style.color = 'black'
+      document.querySelector('#escape-text').innerHTML = ''
     }
   })
 
