@@ -127,6 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.moves[3].move.name,
       ],
     }
+  }
 // **don't delete!**
 //   fetch('https://pokeapi.co/api/v2/pokemon/1')
 //     .then((resp) => resp.json())
