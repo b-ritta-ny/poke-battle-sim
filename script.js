@@ -16,56 +16,52 @@ const renderPoke = (obj, id) => {
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
-  console.log(obj)
+    const addClick = (move) => {
+        move.addEventListener('click', ()=>{
+            // adding text under your div that says what move you used
+            const yourPokeDiv = document.querySelector('#yourPokeDiv')
+            const div = document.createElement('div')
+            div.textContent = `You used ${move.textContent}!`
+            yourPokeDiv.append(div)
 
-  const addClick = (move) => {
-    console.log(move)
-    move.addEventListener('click', () => {
-      // adding text under your div that says what move you used
-      const yourPokeDiv = document.querySelector('#yourPokeDiv')
-      const div = document.createElement('div')
-      div.textContent = `You used ${move.textContent}!`
-      yourPokeDiv.append(div)
+            // subtracting rival's HP
+            const rivalHP = document.querySelector('#rivalPokeHP')
+            let numHP = parseInt(rivalHP.textContent)
+            if(numHP > 0){numHP -= 20}
+            if(numHP === 0){
+                rivalHP.style.color = 'red'
+                const form = document.querySelector('#choosePkmn')
+                const winningH1 = document.createElement('h1')
+                
+                let escText = document.querySelector('#escape-text')
+                escText.innerHTML = 'press esc key to reset battle!'
+              
+                winningH1.textContent = 'YOU WON!!'
+                form.append(winningH1)
+                const moves = document.querySelectorAll('#yourPokeMoves button')
+                moves.forEach(move=>move.disabled=true)
+            }
+            rivalHP.textContent = numHP
 
-      // subtracting rival's HP
-      const rivalHP = document.querySelector('#rivalPokeHP')
-      let numHP = parseInt(rivalHP.textContent)
-      if (numHP > 0) {
-        numHP -= 20
-      }
-      if (numHP === 0) {
-        rivalHP.style.color = 'red'
-        const form = document.querySelector('#choosePkmn')
-        const winningH1 = document.createElement('h1')
-        winningH1.textContent = 'YOU WON!!'
-        form.append(winningH1)
-        const escText = document.querySelector('#escape-text')
-        escText.innerHTML = 'press esc key to reset battle!'
-      }
-      rivalHP.textContent = numHP
+            // rival move
+            function randomIntFromInterval(min, max) {
+                return Math.floor(Math.random() * (max - min + 1) + min)
+            }
+            const rndInt = randomIntFromInterval(0, 3)
+            const rivalMove = rivalMovesArray[rndInt].textContent
 
-      // rival move
-      function randomIntFromInterval(min, max) {
-        return Math.floor(Math.random() * (max - min + 1) + min)
-      }
-      const rndInt = randomIntFromInterval(0, 3)
-      console.log(rndInt)
-      const rivalMove = rivalMovesArray[rndInt].textContent
+            const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
+            const rivalDiv = document.createElement('div')
+            rivalDiv.textContent = `Rival used ${rivalMove}!`
+            rivalPokeDiv.append(rivalDiv)
 
-      const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
-      const rivalDiv = document.createElement('div')
-      rivalDiv.textContent = `Rival used ${rivalMove}!`
-      rivalPokeDiv.append(rivalDiv)
-
-      // subtracting your HP
-      const yourHP = document.querySelector('#yourPokeHP')
-      let yourNumHP = parseInt(yourHP.textContent)
-      if (yourNumHP > 0) {
-        yourNumHP -= 10
-      }
-      yourHP.textContent = yourNumHP
-    })
-  }
+            // subtracting your HP
+            const yourHP = document.querySelector('#yourPokeHP')
+            let yourNumHP = parseInt(yourHP.textContent)
+            if(yourNumHP > 0){yourNumHP -= 10}
+            yourHP.textContent = yourNumHP
+        })
+    }
 
   const yourImg = document.createElement('img')
   yourImg.src = obj[yourId].img
@@ -114,7 +110,7 @@ const battlePoke = (yourId, rivalId, obj) => {
   const yourMovesArray = [yourMove1, yourMove2, yourMove3, yourMove4]
   const rivalMovesArray = [rivalMove1, rivalMove2, rivalMove3, rivalMove4]
 
-  yourMovesArray.forEach((move) => addClick(move))
+  yourMovesArray.forEach(move => addClick(move))
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -131,36 +127,37 @@ document.addEventListener('DOMContentLoaded', () => {
       ],
     }
   }
-  //   fetch('https://pokeapi.co/api/v2/pokemon/1')
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //         addPokeObj(data)
-  //         renderPoke(data)
-  //     })
+// **don't delete!**
+//   fetch('https://pokeapi.co/api/v2/pokemon/1')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//         addPokeObj(data)
+//         renderPoke(data)
+//     })
 
-  //   fetch('https://pokeapi.co/api/v2/pokemon/4')
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //         addPokeObj(data)
-  //         renderPoke(data)
-  //     })
+//   fetch('https://pokeapi.co/api/v2/pokemon/4')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//         addPokeObj(data)
+//         renderPoke(data)
+//     })
 
-  //   fetch('https://pokeapi.co/api/v2/pokemon/7')
-  //     .then((resp) => resp.json())
-  //     .then((data) => {
-  //       addPokeObj(data)
-  //       renderPoke(data)
-  //       console.log(pokeObj[1].name)
-  //       battlePoke(7, 4, pokeObj)
-  //     })
-
-  console.log(pokeObj)
+//   fetch('https://pokeapi.co/api/v2/pokemon/7')
+//     .then((resp) => resp.json())
+//     .then((data) => {
+//       addPokeObj(data)
+//       renderPoke(data)
+//       console.log(pokeObj[1].name)
+//       battlePoke(7, 4, pokeObj)
+//     })
 
   //battlePoke(1, 4)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       document.querySelector('#yourPokeHP').innerText = 100
       document.querySelector('#rivalPokeHP').innerText = 100
+      const moves = document.querySelectorAll('#yourPokeMoves button')
+      moves.forEach(move=>move.disabled=false)
       document.querySelector('#rivalPokeHP').style.color = 'black'
       document.querySelector('#escape-text').innerHTML = ''
     }
@@ -171,32 +168,29 @@ document.addEventListener('DOMContentLoaded', () => {
   const loopFetch = (maxId) => {
     let id = 1
     while (id <= maxId) {
-      fetchArray.push(
-        fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-          .then((resp) => resp.json())
-          .then((data) => {
-            addPokeObj(data)
-          })
-      )
+      fetchArray.push(fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+        .then((resp) => resp.json())
+        .then((data) => {
+          addPokeObj(data)
+        }))
       id++
     }
   }
   loopFetch(9)
 
   Promise.all(fetchArray).then((values) => {
-    for (const id in pokeObj) {
-      renderPoke(pokeObj, id)
-    }
+    for (const id in pokeObj) { renderPoke(pokeObj, id) }
     //battlePoke(3, 6, pokeObj)
   })
 
   const battleForm = document.querySelector('#choosePkmn')
   const handleSubmit = (e) => {
     e.preventDefault()
-
     const yourInput = document.querySelector('#yourEntry').value
     const rivalInput = document.querySelector('#rivalEntry').value
     battlePoke(yourInput, rivalInput, pokeObj)
   }
   battleForm.addEventListener('submit', handleSubmit)
+
 })
+

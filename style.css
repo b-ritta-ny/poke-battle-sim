@@ -1,9 +1,5 @@
 /* stolen from the ramen lab to get some ideas hehehe */
-#title-img {
-  width:300px;
-  height:100px;
-  object-fit:cover
-}
+
 
 title {
   display: hidden;
@@ -25,12 +21,25 @@ body {
 
 header {
   font-size: xx-large;
-  padding: 0.5rem;
+  padding: 1.5rem;
   width: 100%;
   color: white;
   background-color: black;
+  background-image: url('/Users/brittanykelly/Development/code/phase-1/projects/poke-battle-sim/contents/pokeball header bg.png');
+  
 }
 
+header b {
+  display: inline-flex;
+}
+
+html header h1 {
+  font-family: black;
+  color: black;
+  -webkit-text-stroke: 1px white;
+  font-size: 48px;
+  padding-left: 1rem;
+}
 
 label {
   margin: 0;
@@ -38,6 +47,19 @@ label {
   padding-left: inherit;
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+}
+
+#title-img {
+  width: 300px;
+  height: 100px;
+  object-fit: cover;
+}
+
+#sim-img {
+  object-fit: contain;
+  width: 252px;
+    height: 117px;
+    padding-left: 1rem;
 }
 
 #pokeList {
@@ -62,21 +84,17 @@ label {
 
 #yourPokeDiv {
   align-self: baseline;
+  padding-left: 15em;
 }
+
 
 #rivalPokeDiv {
   align-self: end;
-}
-
-/* .idNum {
   position: absolute;
-  margin-top: 1.5em;
-  margin-left: 18em;
-} */
-
-.detail-image {
-  height: 350px;
+    padding-top: 30.01em;
+    padding-right: 15em;
 }
+
 #escape-text{
     position: relative;
     right: 40px
@@ -93,8 +111,7 @@ label {
     }
   }
 
-
-form#choosePkmn {
+#choosePkmn {
   margin: 1rem 0;
   padding: inherit;
   width: 495px;
@@ -103,7 +120,16 @@ form#choosePkmn {
   align-items: normal;
 }
 
+#footer-img {
+  width: 200px;
+    height: 88px;
+    position: fixed;
+    margin: 21em;
+}
 
+.detail-image {
+  height: 350px;
+}
 
 input,
 textarea {
@@ -122,6 +148,7 @@ input[type="submit"] {
     border-radius: 20px;
     box-shadow: 5px 5px 5px #eee;
     text-shadow: none;
+    margin-left: 1em;
 }
 input:hover[type="submit"]{
     background: #bc0101;
@@ -130,10 +157,12 @@ input:hover[type="submit"]{
     border-radius: 20px;
     box-shadow: 5px 5px 5px #eee;
     text-shadow: none;
+    margin-left: 1em;
 }
 
 input[type="submit"]:active {
   background-color: gray;
+  margin-left: 1em;
 }
 
 form h4 {
