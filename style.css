@@ -90,7 +90,21 @@ label {
     padding-top: 30.01em;
 }
 }
+#escape-text{
+    position: absolute;
+    left: 625px
+}
 
+#escape-text {
+    animation: blinker 1.5s step-start infinite;
+    color:rgb(176, 23, 222)
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
 #choosePkmn {
   margin: 1rem 0;
@@ -101,11 +115,9 @@ label {
   align-items: normal;
 }
 
-
 .detail-image {
   height: 350px;
 }
-
 
 input,
 textarea {

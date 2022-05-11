@@ -30,11 +30,19 @@ const battlePoke = (yourId, rivalId, obj) => {
       // subtracting rival's HP
       const rivalHP = document.querySelector('#rivalPokeHP')
       let numHP = parseInt(rivalHP.textContent)
-      if (numHP > 0) { numHP -= 20 }
+
+      if (numHP > 0) {
+        numHP -= 20
+      }
+
       if (numHP === 0) {
         rivalHP.style.color = 'red'
         const form = document.querySelector('#choosePkmn')
         const winningH1 = document.createElement('h1')
+
+        let escText = document.querySelector('#escape-text')
+        escText.innerHTML = 'press esc key to reset battle!'
+
         winningH1.textContent = 'YOU WON!!'
         form.append(winningH1)
       }
@@ -56,12 +64,11 @@ const battlePoke = (yourId, rivalId, obj) => {
       // subtracting your HP
       const yourHP = document.querySelector('#yourPokeHP')
       let yourNumHP = parseInt(yourHP.textContent)
+
       if (yourNumHP > 0) { yourNumHP -= 10 }
       yourHP.textContent = yourNumHP
     })
   }
-
-
 
 
   const yourImg = document.createElement('img')
@@ -125,7 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
         data.moves[1].move.name,
         data.moves[2].move.name,
         data.moves[3].move.name,
-      ]
+      ],
     }
   }
   //   fetch('https://pokeapi.co/api/v2/pokemon/1')
@@ -151,21 +158,20 @@ document.addEventListener('DOMContentLoaded', () => {
   //       battlePoke(7, 4, pokeObj)
   //     })
 
-
   console.log(pokeObj)
 
   //battlePoke(1, 4)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
-      console.log('I was reset')
       document.querySelector('#yourPokeHP').innerText = 100
       document.querySelector('#rivalPokeHP').innerText = 100
+      document.querySelector('#rivalPokeHP').style.color = 'black'
     }
   })
 
   // testing multiple fetch request loop
   let fetchArray = []
-  const loopFetch = maxId => {
+  const loopFetch = (maxId) => {
     let id = 1
     while (id <= maxId) {
       fetchArray.push(fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
@@ -177,19 +183,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   loopFetch(9)
-
-  Promise.all(fetchArray)
-    .then(values => {
-      for (const id in pokeObj) { renderPoke(pokeObj, id) }
-      //battlePoke(3, 6, pokeObj)
-    })
+  
+  Promise.all(fetchArray).then((values) => {
+    for (const id in pokeObj) {renderPoke(pokeObj, id)}
+    //battlePoke(3, 6, pokeObj)
+  })
 
   const battleForm = document.querySelector('#choosePkmn')
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const yourInput = document.querySelector('#yourEntry').value
     const rivalInput = document.querySelector('#rivalEntry').value
-    battlePoke(yourInput, rivalInput, pokeObj);
-  };
-  battleForm.addEventListener('submit', handleSubmit);
+    battlePoke(yourInput, rivalInput, pokeObj)
+  }
+  battleForm.addEventListener('submit', handleSubmit)
 })
+
