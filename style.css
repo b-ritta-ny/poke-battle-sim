@@ -82,6 +82,9 @@ h3.pkmn {
   margin-right: 0;
 }
 
+#filter {
+  padding-bottom: .5em;
+}
 
 #yourPokeDiv {
   align-self: baseline;
@@ -92,7 +95,7 @@ h3.pkmn {
 #rivalPokeDiv {
   align-self: end;
   position: absolute;
-    padding-top: 43.5em;
+    padding-top: 43.8em;
     padding-right: 15em;
 }
 
@@ -121,11 +124,24 @@ h3.pkmn {
   align-items: normal;
 }
 
+html img#yourPkmnBattler.choosePkmn {
+  width: 200px;
+  height: auto;
+  padding-left: 3.5em;
+}
+
+html img#rivalPkmnBattler.choosePkmn {
+  width: 200px;
+  height: auto;
+  padding-left: 3.5em;
+}
+
+
 #footer-img {
   width: 200px;
-    height: 88px;
-    position: fixed;
-    margin: 21em;
+  height: 88px;
+  position: fixed;
+  margin: 14em 29em;
 }
 
 .detail-image {
@@ -182,4 +198,5 @@ h2.idNum {
 img.choosePkmn {
   padding-right: 3em;
   padding-left: 1rem;
+  display: block;
 }
