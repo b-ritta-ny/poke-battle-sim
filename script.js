@@ -38,13 +38,16 @@ const battlePoke = (yourId, rivalId, obj) => {
       // adding text under your div that says what move you used
       const yourPokeDiv = document.querySelector('#yourPokeDiv')
       const div = document.createElement('div')
-      div.textContent = `You used ${move.textContent}!`
-      yourPokeDiv.append(div)
+
 
       // subtracting rival's HP
       const rivalHP = document.querySelector('#rivalPokeHP')
       let numHP = parseInt(rivalHP.textContent)
-      if (numHP > 0) { numHP -= 20 }
+
+      let dmg = 20
+      if (numHP > 0) { numHP -= dmg }
+      div.textContent = `You used ${move.textContent} for ${dmg} damage!`
+      yourPokeDiv.append(div)      
       if (numHP === 0) {
         rivalHP.style.color = 'red'
         const form = document.querySelector('#choosePkmn')
@@ -69,13 +72,15 @@ const battlePoke = (yourId, rivalId, obj) => {
 
       const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
       const rivalDiv = document.createElement('div')
-      rivalDiv.textContent = `Rival used ${rivalMove}!`
-      rivalPokeDiv.append(rivalDiv)
+
 
       // subtracting your HP
       const yourHP = document.querySelector('#yourPokeHP')
       let yourNumHP = parseInt(yourHP.textContent)
-      if (yourNumHP > 0) { yourNumHP -= 10 }
+      let yourDmg = 10
+      if (yourNumHP > 0) { yourNumHP -= yourDmg }
+      rivalDiv.textContent = `Rival used ${rivalMove} for ${yourDmg} damage!`
+      rivalPokeDiv.append(rivalDiv)      
       yourHP.textContent = yourNumHP
     })
   }
