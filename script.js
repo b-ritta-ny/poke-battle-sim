@@ -63,7 +63,6 @@ const battlePoke = (yourId, rivalId, obj) => {
         })
     }
 
-
   const yourImg = document.createElement('img')
   yourImg.src = obj[yourId].img
   yourImg.className = 'choosePkmn'
@@ -160,6 +159,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const moves = document.querySelectorAll('#yourPokeMoves button')
       moves.forEach(move=>move.disabled=false)
       document.querySelector('#rivalPokeHP').style.color = 'black'
+      document.querySelector('#escape-text').innerHTML = ''
     }
   })
 

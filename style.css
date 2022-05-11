@@ -96,8 +96,8 @@ label {
 }
 
 #escape-text{
-    position: absolute;
-    left: 625px
+    position: relative;
+    right: 40px
 }
 
 #escape-text {
