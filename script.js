@@ -27,58 +27,58 @@ const renderPoke = (obj, id) => {
   pokeDiv.append(pokeH1, pokeImg)
   pokeH1.appendChild(pokeId)
   pokeH1.appendChild(pokeType)
-  
+
   selectType.appendChild(typeOption)
-  
+
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
-    const addClick = (move) => {
-        move.addEventListener('click', ()=>{
-            // adding text under your div that says what move you used
-            const yourPokeDiv = document.querySelector('#yourPokeDiv')
-            const div = document.createElement('div')
-            div.textContent = `You used ${move.textContent}!`
-            yourPokeDiv.append(div)
+  const addClick = (move) => {
+    move.addEventListener('click', () => {
+      // adding text under your div that says what move you used
+      const yourPokeDiv = document.querySelector('#yourPokeDiv')
+      const div = document.createElement('div')
+      div.textContent = `You used ${move.textContent}!`
+      yourPokeDiv.append(div)
 
-            // subtracting rival's HP
-            const rivalHP = document.querySelector('#rivalPokeHP')
-            let numHP = parseInt(rivalHP.textContent)
-            if(numHP > 0){numHP -= 20}
-            if(numHP === 0){
-                rivalHP.style.color = 'red'
-                const form = document.querySelector('#choosePkmn')
-                const winningH1 = document.createElement('h1')
-                
-                let escText = document.querySelector('#escape-text')
-                escText.innerHTML = 'press esc key to reset battle!'
-              
-                winningH1.textContent = 'YOU WON!!'
-                form.append(winningH1)
-                const moves = document.querySelectorAll('#yourPokeMoves button')
-                moves.forEach(move=>move.disabled=true)
-            }
-            rivalHP.textContent = numHP
+      // subtracting rival's HP
+      const rivalHP = document.querySelector('#rivalPokeHP')
+      let numHP = parseInt(rivalHP.textContent)
+      if (numHP > 0) { numHP -= 20 }
+      if (numHP === 0) {
+        rivalHP.style.color = 'red'
+        const form = document.querySelector('#choosePkmn')
+        const winningH1 = document.createElement('h1')
 
-            // rival move
-            function randomIntFromInterval(min, max) {
-                return Math.floor(Math.random() * (max - min + 1) + min)
-            }
-            const rndInt = randomIntFromInterval(0, 3)
-            const rivalMove = rivalMovesArray[rndInt].textContent
+        let escText = document.querySelector('#escape-text')
+        escText.innerHTML = 'press esc key to reset battle!'
 
-            const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
-            const rivalDiv = document.createElement('div')
-            rivalDiv.textContent = `Rival used ${rivalMove}!`
-            rivalPokeDiv.append(rivalDiv)
+        winningH1.textContent = 'YOU WON!!'
+        form.append(winningH1)
+        const moves = document.querySelectorAll('#yourPokeMoves button')
+        moves.forEach(move => move.disabled = true)
+      }
+      rivalHP.textContent = numHP
 
-            // subtracting your HP
-            const yourHP = document.querySelector('#yourPokeHP')
-            let yourNumHP = parseInt(yourHP.textContent)
-            if(yourNumHP > 0){yourNumHP -= 10}
-            yourHP.textContent = yourNumHP
-        })
-    }
+      // rival move
+      function randomIntFromInterval(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min)
+      }
+      const rndInt = randomIntFromInterval(0, 3)
+      const rivalMove = rivalMovesArray[rndInt].textContent
+
+      const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
+      const rivalDiv = document.createElement('div')
+      rivalDiv.textContent = `Rival used ${rivalMove}!`
+      rivalPokeDiv.append(rivalDiv)
+
+      // subtracting your HP
+      const yourHP = document.querySelector('#yourPokeHP')
+      let yourNumHP = parseInt(yourHP.textContent)
+      if (yourNumHP > 0) { yourNumHP -= 10 }
+      yourHP.textContent = yourNumHP
+    })
+  }
 
   const yourImg = document.createElement('img')
   yourImg.src = obj[yourId].img
@@ -131,44 +131,44 @@ const battlePoke = (yourId, rivalId, obj) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-    const pokeObj = {}
-    const addPokeObj = (data) => {
-        pokeObj[data.id] = {
-            name: data.name, 
-            img: data.sprites.front_default,
-            moves: [
-                data.moves[0].move.name,
-                data.moves[1].move.name,
-                data.moves[2].move.name,
-                data.moves[3].move.name,
-            ],
-            type: data.types[0].type.name,
-        }
+  const pokeObj = {}
+  const addPokeObj = (data) => {
+    pokeObj[data.id] = {
+      name: data.name,
+      img: data.sprites.front_default,
+      moves: [
+        data.moves[0].move.name,
+        data.moves[1].move.name,
+        data.moves[2].move.name,
+        data.moves[3].move.name,
+      ],
+      type: data.types[0].type.name,
     }
   }
-// **don't delete!**
-//   fetch('https://pokeapi.co/api/v2/pokemon/1')
-//     .then((resp) => resp.json())
-//     .then((data) => {
-//         addPokeObj(data)
-//         renderPoke(data)
-//     })
 
-//   fetch('https://pokeapi.co/api/v2/pokemon/4')
-//     .then((resp) => resp.json())
-//     .then((data) => {
-//         addPokeObj(data)
-//         renderPoke(data)
-//     })
+  // **don't delete!**
+  //   fetch('https://pokeapi.co/api/v2/pokemon/1')
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //         addPokeObj(data)
+  //         renderPoke(data)
+  //     })
 
-//   fetch('https://pokeapi.co/api/v2/pokemon/7')
-//     .then((resp) => resp.json())
-//     .then((data) => {
-//       addPokeObj(data)
-//       renderPoke(data)
-//       console.log(pokeObj[1].name)
-//       battlePoke(7, 4, pokeObj)
-//     })
+  //   fetch('https://pokeapi.co/api/v2/pokemon/4')
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //         addPokeObj(data)
+  //         renderPoke(data)
+  //     })
+
+  //   fetch('https://pokeapi.co/api/v2/pokemon/7')
+  //     .then((resp) => resp.json())
+  //     .then((data) => {
+  //       addPokeObj(data)
+  //       renderPoke(data)
+  //       console.log(pokeObj[1].name)
+  //       battlePoke(7, 4, pokeObj)
+  //     })
 
   //battlePoke(1, 4)
   document.addEventListener('keydown', (e) => {
@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#yourPokeHP').innerText = 100
       document.querySelector('#rivalPokeHP').innerText = 100
       const moves = document.querySelectorAll('#yourPokeMoves button')
-      moves.forEach(move=>move.disabled=false)
+      moves.forEach(move => move.disabled = false)
       document.querySelector('#rivalPokeHP').style.color = 'black'
       document.querySelector('#escape-text').innerHTML = ''
     }
@@ -196,42 +196,42 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   loopFetch(51)
-  
-    Promise.all(fetchArray)
-    .then(values=>{
-        for(const id in pokeObj) {renderPoke(pokeObj, id)}
 
-        //configuring select function to filter pokemon by type in pokelist 
-        const allOptions = document.querySelectorAll('#typeSelect option')
-        const selectType = document.querySelector('#typeSelect')
-        const pokeList = document.querySelectorAll('#pokeList > *')
-        const allTypes = document.querySelectorAll('#pokeList h1 h3')
+  Promise.all(fetchArray)
+    .then(values => {
+      for (const id in pokeObj) { renderPoke(pokeObj, id) }
 
-        selectType.addEventListener('click', selectClick)
+      //configuring select function to filter pokemon by type in pokelist 
+      const allOptions = document.querySelectorAll('#typeSelect option')
+      const selectType = document.querySelector('#typeSelect')
+      const pokeList = document.querySelectorAll('#pokeList > *')
+      const allTypes = document.querySelectorAll('#pokeList h1 h3')
 
-        function selectClick(e){
-          const allPokeDivs = document.querySelectorAll('div div')
-          allPokeDivs.forEach(div=>div.style.display='block')
-          allTypes.forEach(type=>{
-            if(e.target.value === 'All'){}
-            else if(type.textContent !== e.target.value){
-              type.parentNode.parentNode.style.display = 'none'
-            }
-          })
+      selectType.addEventListener('click', selectClick)
 
-          
-        }
-        //battlePoke(3, 6, pokeObj)
+      function selectClick(e) {
+        const allPokeDivs = document.querySelectorAll('div div')
+        allPokeDivs.forEach(div => div.style.display = 'block')
+        allTypes.forEach(type => {
+          if (e.target.value === 'All') { }
+          else if (type.textContent !== e.target.value) {
+            type.parentNode.parentNode.style.display = 'none'
+          }
+        })
+
+
+      }
+      //battlePoke(3, 6, pokeObj)
     })
 
-    const battleForm = document.querySelector('#choosePkmn')
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const yourInput = document.querySelector('#yourEntry').value
-        const rivalInput = document.querySelector('#rivalEntry').value
-        battlePoke(yourInput, rivalInput, pokeObj);
-    };
-    battleForm.addEventListener('submit', handleSubmit); 
+  const battleForm = document.querySelector('#choosePkmn')
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const yourInput = document.querySelector('#yourEntry').value
+    const rivalInput = document.querySelector('#rivalEntry').value
+    battlePoke(yourInput, rivalInput, pokeObj);
+  };
+  battleForm.addEventListener('submit', handleSubmit);
 
-    
+
 })
