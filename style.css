@@ -1,9 +1,5 @@
 /* stolen from the ramen lab to get some ideas hehehe */
-#title-img {
-  width:300px;
-  height:100px;
-  object-fit:cover
-}
+
 
 title {
   display: hidden;
@@ -25,12 +21,25 @@ body {
 
 header {
   font-size: xx-large;
-  padding: 0.5rem;
+  padding: 1.5rem;
   width: 100%;
   color: white;
   background-color: black;
+  background-image: url('/Users/brittanykelly/Development/code/phase-1/projects/poke-battle-sim/contents/pokeball header bg.png');
+  
 }
 
+header b {
+  display: inline-flex;
+}
+
+html header h1 {
+  font-family: black;
+  color: black;
+  -webkit-text-stroke: 1px white;
+  font-size: 48px;
+  padding-left: 1rem;
+}
 
 label {
   margin: 0;
@@ -38,6 +47,16 @@ label {
   padding-left: inherit;
   font-family: Arial, Helvetica, sans-serif;
   box-sizing: border-box;
+}
+
+#title-img {
+  width: 300px;
+  height: 100px;
+  object-fit: cover;
+}
+
+#sim-img {
+  object-fit: contain;
 }
 
 #pokeList {
@@ -64,29 +83,40 @@ label {
   align-self: baseline;
 }
 
+
 #rivalPokeDiv {
   align-self: end;
-}
-
-/* .idNum {
   position: absolute;
-  margin-top: 1.5em;
-  margin-left: 18em;
-} */
-
-.detail-image {
-  height: 350px;
+    padding-top: 30.01em;
+}
+}
+#escape-text{
+    position: absolute;
+    left: 625px
 }
 
+#escape-text {
+    animation: blinker 1.5s step-start infinite;
+    color:rgb(176, 23, 222)
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
-
-form#choosePkmn {
+#choosePkmn {
   margin: 1rem 0;
   padding: inherit;
   width: 495px;
   display: flex;
   flex-direction: row;
   align-items: normal;
+}
+
+.detail-image {
+  height: 350px;
 }
 
 input,
