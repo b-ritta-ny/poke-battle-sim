@@ -57,6 +57,9 @@ label {
 
 #sim-img {
   object-fit: contain;
+  width: 252px;
+    height: 117px;
+    padding-left: 1rem;
 }
 
 #pokeList {
@@ -81,6 +84,7 @@ label {
 
 #yourPokeDiv {
   align-self: baseline;
+  padding-left: 15em;
 }
 
 
@@ -88,6 +92,7 @@ label {
   align-self: end;
   position: absolute;
     padding-top: 30.01em;
+    padding-right: 15em;
 }
 
 #escape-text{
@@ -115,6 +120,13 @@ label {
   align-items: normal;
 }
 
+#footer-img {
+  width: 200px;
+    height: 88px;
+    position: fixed;
+    margin: 21em;
+}
+
 .detail-image {
   height: 350px;
 }
@@ -136,6 +148,7 @@ input[type="submit"] {
     border-radius: 20px;
     box-shadow: 5px 5px 5px #eee;
     text-shadow: none;
+    margin-left: 1em;
 }
 input:hover[type="submit"]{
     background: #bc0101;
@@ -144,10 +157,12 @@ input:hover[type="submit"]{
     border-radius: 20px;
     box-shadow: 5px 5px 5px #eee;
     text-shadow: none;
+    margin-left: 1em;
 }
 
 input[type="submit"]:active {
   background-color: gray;
+  margin-left: 1em;
 }
 
 form h4 {

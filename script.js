@@ -177,9 +177,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
   loopFetch(9)
-  
+
   Promise.all(fetchArray).then((values) => {
-    for (const id in pokeObj) {renderPoke(pokeObj, id)}
+    for (const id in pokeObj) { renderPoke(pokeObj, id) }
     //battlePoke(3, 6, pokeObj)
   })
 
@@ -191,5 +191,6 @@ document.addEventListener('DOMContentLoaded', () => {
     battlePoke(yourInput, rivalInput, pokeObj)
   }
   battleForm.addEventListener('submit', handleSubmit)
+
 })
 
