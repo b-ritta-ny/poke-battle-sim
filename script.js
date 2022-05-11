@@ -16,10 +16,7 @@ const renderPoke = (obj, id) => {
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
-    console.log(obj)
-
     const addClick = (move) => {
-        console.log(move)
         move.addEventListener('click', ()=>{
             // adding text under your div that says what move you used
             const yourPokeDiv = document.querySelector('#yourPokeDiv')
@@ -37,6 +34,8 @@ const battlePoke = (yourId, rivalId, obj) => {
                 const winningH1 = document.createElement('h1')
                 winningH1.textContent = 'YOU WON!!'
                 form.append(winningH1)
+                const moves = document.querySelectorAll('#yourPokeMoves button')
+                moves.forEach(move=>move.disabled=true)
             }
             rivalHP.textContent = numHP
 
@@ -45,7 +44,6 @@ const battlePoke = (yourId, rivalId, obj) => {
                 return Math.floor(Math.random() * (max - min + 1) + min)
             }
             const rndInt = randomIntFromInterval(0, 3)
-            console.log(rndInt)
             const rivalMove = rivalMovesArray[rndInt].textContent
 
             const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
@@ -128,6 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ]
         }
     }
+// **don't delete!**
 //   fetch('https://pokeapi.co/api/v2/pokemon/1')
 //     .then((resp) => resp.json())
 //     .then((data) => {
@@ -152,14 +151,14 @@ document.addEventListener('DOMContentLoaded', () => {
 //     })
 
 
-  console.log(pokeObj)
-
   //battlePoke(1, 4)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
       console.log('I was reset')
       document.querySelector('#yourPokeHP').innerText = 100
       document.querySelector('#rivalPokeHP').innerText = 100
+      const moves = document.querySelectorAll('#yourPokeMoves button')
+      moves.forEach(move=>move.disabled=false)
     }
   })
 
