@@ -77,7 +77,21 @@ label {
 .detail-image {
   height: 350px;
 }
+#escape-text{
+    position: absolute;
+    left: 625px
+}
 
+#escape-text {
+    animation: blinker 1.5s step-start infinite;
+    color:rgb(176, 23, 222)
+  }
+  
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
 
 
 form#choosePkmn {
@@ -88,6 +102,8 @@ form#choosePkmn {
   flex-direction: row;
   align-items: normal;
 }
+
+
 
 input,
 textarea {
