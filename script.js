@@ -3,16 +3,33 @@ const renderPoke = (obj, id) => {
   const pokeH1 = document.createElement('h1')
   const pokeImg = document.createElement('img')
   const pokeId = document.createElement('h2')
+  const pokeType = document.createElement('h3')
+  const selectType = document.querySelector('#typeSelect')
+  const typeOption = document.createElement('option')
+  const pokeDiv = document.createElement('div')
 
   pokeImg.className = 'choosePkmn'
   pokeH1.innerText = obj[id].name
   pokeH1.className = 'pkmn'
+  pokeH1.setAttribute('name', 'pokeInfo')
   pokeId.innerHTML = `<br>${id}`
   pokeId.className = 'idNum'
   pokeImg.src = obj[id].img
+  pokeType.className = 'pkmn'
+  pokeType.textContent = obj[id].type
+  pokeType.setAttribute('name', 'pokeType')
+  typeOption.textContent = obj[id].type
+  //need to do something about options repeating -brian
+  typeOption.value = obj[id].type
+  pokeDiv.id = id
 
-  pokeList.append(pokeH1, pokeImg)
+  pokeList.appendChild(pokeDiv)
+  pokeDiv.append(pokeH1, pokeImg)
   pokeH1.appendChild(pokeId)
+  pokeH1.appendChild(pokeType)
+  
+  selectType.appendChild(typeOption)
+  
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
@@ -114,17 +131,19 @@ const battlePoke = (yourId, rivalId, obj) => {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
-  const pokeObj = {}
-  const addPokeObj = (data) => {
-    pokeObj[data.id] = {
-      name: data.name,
-      img: data.sprites.front_default,
-      moves: [
-        data.moves[0].move.name,
-        data.moves[1].move.name,
-        data.moves[2].move.name,
-        data.moves[3].move.name,
-      ],
+    const pokeObj = {}
+    const addPokeObj = (data) => {
+        pokeObj[data.id] = {
+            name: data.name, 
+            img: data.sprites.front_default,
+            moves: [
+                data.moves[0].move.name,
+                data.moves[1].move.name,
+                data.moves[2].move.name,
+                data.moves[3].move.name,
+            ],
+            type: data.types[0].type.name,
+        }
     }
   }
 // **don't delete!**
@@ -176,21 +195,43 @@ document.addEventListener('DOMContentLoaded', () => {
       id++
     }
   }
-  loopFetch(9)
+  loopFetch(51)
+  
+    Promise.all(fetchArray)
+    .then(values=>{
+        for(const id in pokeObj) {renderPoke(pokeObj, id)}
 
-  Promise.all(fetchArray).then((values) => {
-    for (const id in pokeObj) { renderPoke(pokeObj, id) }
-    //battlePoke(3, 6, pokeObj)
-  })
+        //configuring select function to filter pokemon by type in pokelist 
+        const allOptions = document.querySelectorAll('#typeSelect option')
+        const selectType = document.querySelector('#typeSelect')
+        const pokeList = document.querySelectorAll('#pokeList > *')
+        const allTypes = document.querySelectorAll('#pokeList h1 h3')
 
-  const battleForm = document.querySelector('#choosePkmn')
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    const yourInput = document.querySelector('#yourEntry').value
-    const rivalInput = document.querySelector('#rivalEntry').value
-    battlePoke(yourInput, rivalInput, pokeObj)
-  }
-  battleForm.addEventListener('submit', handleSubmit)
+        selectType.addEventListener('click', selectClick)
 
+        function selectClick(e){
+          const allPokeDivs = document.querySelectorAll('div div')
+          allPokeDivs.forEach(div=>div.style.display='block')
+          allTypes.forEach(type=>{
+            if(e.target.value === 'All'){}
+            else if(type.textContent !== e.target.value){
+              type.parentNode.parentNode.style.display = 'none'
+            }
+          })
+
+          
+        }
+        //battlePoke(3, 6, pokeObj)
+    })
+
+    const battleForm = document.querySelector('#choosePkmn')
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const yourInput = document.querySelector('#yourEntry').value
+        const rivalInput = document.querySelector('#rivalEntry').value
+        battlePoke(yourInput, rivalInput, pokeObj);
+    };
+    battleForm.addEventListener('submit', handleSubmit); 
+
+    
 })
-
