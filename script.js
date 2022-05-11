@@ -3,6 +3,9 @@ const renderPoke = (obj, id) => {
   const pokeH1 = document.createElement('h1')
   const pokeImg = document.createElement('img')
   const pokeId = document.createElement('h2')
+  const pokeType = document.createElement('h3')
+  const selectType = document.querySelector('#typeSelect')
+  const typeOption = document.createElement('option')
 
   pokeImg.className = 'choosePkmn'
   pokeH1.innerText = obj[id].name
@@ -10,9 +13,17 @@ const renderPoke = (obj, id) => {
   pokeId.innerHTML = `<br>${id}`
   pokeId.className = 'idNum'
   pokeImg.src = obj[id].img
+  pokeType.className = 'pkmn'
+  pokeType.textContent = obj[id].type
+  typeOption.textContent = obj[id].type
+  typeOption.value = obj[id].type
 
   pokeList.append(pokeH1, pokeImg)
   pokeH1.appendChild(pokeId)
+  pokeH1.appendChild(pokeType)
+  
+  selectType.appendChild(typeOption)
+  
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
@@ -125,7 +136,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 data.moves[1].move.name,
                 data.moves[2].move.name,
                 data.moves[3].move.name,
-            ]
+            ],
+            type: data.types[0].type.name,
         }
     }
 //   fetch('https://pokeapi.co/api/v2/pokemon/1')
@@ -180,6 +192,18 @@ document.addEventListener('DOMContentLoaded', () => {
     Promise.all(fetchArray)
     .then(values=>{
         for(const id in pokeObj) {renderPoke(pokeObj, id)}
+        const allOptions = document.querySelectorAll('#typeSelect option')
+        const selectType = document.querySelector('#typeSelect')
+        const pokeList = document.querySelectorAll('#pokeList')
+        const allTypes = document.querySelectorAll('#pokeList h1 h3')
+        selectType.addEventListener('click', selectClick)
+        function selectClick(e){
+          console.log(e.target.value)
+          if(e.target.value === 'All'){}else{
+            
+          }
+        }
+        console.log(allTypes[0].parentElement.nextSibling)
         //battlePoke(3, 6, pokeObj)
     })
 
@@ -192,5 +216,5 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     battleForm.addEventListener('submit', handleSubmit); 
 
-
+    
 })
