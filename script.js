@@ -44,11 +44,11 @@ const battlePoke = (yourId, rivalId, obj) => {
       const rivalHP = document.querySelector('#rivalPokeHP')
       let numHP = parseInt(rivalHP.textContent)
 
-      let dmg = 20
+      let dmg = randomIntFromInterval(1, 3)*10
       if (numHP > 0) { numHP -= dmg }
       div.textContent = `You used ${move.textContent} for ${dmg} damage!`
       yourPokeDiv.append(div)      
-      if (numHP === 0) {
+      if (numHP <= 0) {
         rivalHP.style.color = 'red'
         const form = document.querySelector('#choosePkmn')
         const winningH1 = document.createElement('h1')
@@ -57,6 +57,7 @@ const battlePoke = (yourId, rivalId, obj) => {
         escText.innerHTML = 'press esc key to reset battle!'
 
         winningH1.textContent = 'YOU WON!!'
+        winningH1.style.color = 'green'
         form.append(winningH1)
         const moves = document.querySelectorAll('#yourPokeMoves button')
         moves.forEach(move => move.disabled = true)
@@ -77,10 +78,24 @@ const battlePoke = (yourId, rivalId, obj) => {
       // subtracting your HP
       const yourHP = document.querySelector('#yourPokeHP')
       let yourNumHP = parseInt(yourHP.textContent)
-      let yourDmg = 10
+      let yourDmg = randomIntFromInterval(0, 3)*10
       if (yourNumHP > 0) { yourNumHP -= yourDmg }
       rivalDiv.textContent = `Rival used ${rivalMove} for ${yourDmg} damage!`
       rivalPokeDiv.append(rivalDiv)      
+      if (yourNumHP <= 0) {
+        yourHP.style.color = 'red'
+        const form = document.querySelector('#choosePkmn')
+        const losingH1 = document.createElement('h1')
+
+        let escText = document.querySelector('#escape-text')
+        escText.innerHTML = 'press esc key to reset battle!'
+
+        losingH1.textContent = 'RIVAL WON!!'
+        losingH1.style.color = 'red'
+        form.append(losingH1)
+        const moves = document.querySelectorAll('#yourPokeMoves button')
+        moves.forEach(move => move.disabled = true)
+      }
       yourHP.textContent = yourNumHP
     })
   }
