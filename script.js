@@ -6,19 +6,25 @@ const renderPoke = (obj, id) => {
   const pokeType = document.createElement('h3')
   const selectType = document.querySelector('#typeSelect')
   const typeOption = document.createElement('option')
+  const pokeDiv = document.createElement('div')
 
   pokeImg.className = 'choosePkmn'
   pokeH1.innerText = obj[id].name
   pokeH1.className = 'pkmn'
+  pokeH1.setAttribute('name', 'pokeInfo')
   pokeId.innerHTML = `<br>${id}`
   pokeId.className = 'idNum'
   pokeImg.src = obj[id].img
   pokeType.className = 'pkmn'
   pokeType.textContent = obj[id].type
+  pokeType.setAttribute('name', 'pokeType')
   typeOption.textContent = obj[id].type
+  //need to do something about options repeating -brian
   typeOption.value = obj[id].type
+  pokeDiv.id = id
 
-  pokeList.append(pokeH1, pokeImg)
+  pokeList.appendChild(pokeDiv)
+  pokeDiv.append(pokeH1, pokeImg)
   pokeH1.appendChild(pokeId)
   pokeH1.appendChild(pokeType)
   
@@ -27,10 +33,7 @@ const renderPoke = (obj, id) => {
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
-    console.log(obj)
-
     const addClick = (move) => {
-        console.log(move)
         move.addEventListener('click', ()=>{
             // adding text under your div that says what move you used
             const yourPokeDiv = document.querySelector('#yourPokeDiv')
@@ -56,7 +59,6 @@ const battlePoke = (yourId, rivalId, obj) => {
                 return Math.floor(Math.random() * (max - min + 1) + min)
             }
             const rndInt = randomIntFromInterval(0, 3)
-            console.log(rndInt)
             const rivalMove = rivalMovesArray[rndInt].textContent
 
             const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
@@ -163,9 +165,6 @@ document.addEventListener('DOMContentLoaded', () => {
 //       battlePoke(7, 4, pokeObj)
 //     })
 
-
-  console.log(pokeObj)
-
   //battlePoke(1, 4)
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
@@ -187,23 +186,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }))
     id++}
   }
-  loopFetch(9)
+  loopFetch(51)
   
     Promise.all(fetchArray)
     .then(values=>{
         for(const id in pokeObj) {renderPoke(pokeObj, id)}
+
+        //configuring select function to filter pokemon by type in pokelist 
         const allOptions = document.querySelectorAll('#typeSelect option')
         const selectType = document.querySelector('#typeSelect')
-        const pokeList = document.querySelectorAll('#pokeList')
+        const pokeList = document.querySelectorAll('#pokeList > *')
         const allTypes = document.querySelectorAll('#pokeList h1 h3')
+
         selectType.addEventListener('click', selectClick)
+
         function selectClick(e){
-          console.log(e.target.value)
-          if(e.target.value === 'All'){}else{
-            
-          }
+          const allPokeDivs = document.querySelectorAll('div div')
+          allPokeDivs.forEach(div=>div.style.display='block')
+          allTypes.forEach(type=>{
+            if(e.target.value === 'All'){}
+            else if(type.textContent !== e.target.value){
+              type.parentNode.parentNode.style.display = 'none'
+            }
+          })
+
+          
         }
-        console.log(allTypes[0].parentElement.nextSibling)
         //battlePoke(3, 6, pokeObj)
     })
 
