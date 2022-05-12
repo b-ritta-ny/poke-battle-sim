@@ -206,8 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#rivalPokeHP').style.color = 'black'
       document.querySelector('#yourPokeHP').style.color = 'black'
       document.querySelector('#escape-text').innerHTML = ''
-      document.querySelector('#yourPokeName').remove()
-      document.querySelector('#rivalPokeName').remove()
+      document.querySelector('#yourPokeName').textContent = ''
+      document.querySelector('#rivalPokeName').textContent = ''
       const resetDivs1 = document.querySelectorAll('div .reset1')
       document.querySelector('#choosePkmn').innerHTML =
         ' <label for="yourPkmn">Your Pokémon ID:</label><input type="text" id="yourEntry" name="idEntry"> <input type="submit" id="submit" value="Battle"><label for="vsPkmn">Rival Pokémon ID:</label> <input type="text" id="rivalEntry" name="idEntry">'
