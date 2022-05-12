@@ -84,6 +84,10 @@ h3.pkmn {
   margin-right: 0;
 }
 
+#grass {
+  color: #78C850;
+}
+
 #filter {
   padding-bottom: .5em;
 }
@@ -167,6 +171,7 @@ input[type="submit"] {
     box-shadow: 5px 5px 5px #eee;
     text-shadow: none;
     margin-left: 1em;
+    margin-right: 1em;
 }
 input:hover[type="submit"]{
     background: #bc0101;
@@ -176,11 +181,13 @@ input:hover[type="submit"]{
     box-shadow: 5px 5px 5px #eee;
     text-shadow: none;
     margin-left: 1em;
+    margin-right: 1em;
 }
 
 input[type="submit"]:active {
   background-color: gray;
   margin-left: 1em;
+  margin-right: 1em;
 }
 
 form h4 {
