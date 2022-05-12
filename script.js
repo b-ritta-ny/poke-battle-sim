@@ -29,7 +29,6 @@ const renderPoke = (obj, id) => {
   pokeH1.appendChild(pokeType)
 
   selectType.appendChild(typeOption)
-
 }
 
 const battlePoke = (yourId, rivalId, obj) => {
@@ -38,17 +37,21 @@ const battlePoke = (yourId, rivalId, obj) => {
       // adding text under your div that says what move you used
       const yourPokeDiv = document.querySelector('#yourPokeDiv')
       const div = document.createElement('div')
+      div.setAttribute('class', 'reset1')
       div.textContent = `You used ${move.textContent}!`
       yourPokeDiv.append(div)
 
       // subtracting rival's HP
       const rivalHP = document.querySelector('#rivalPokeHP')
       let numHP = parseInt(rivalHP.textContent)
-      if (numHP > 0) { numHP -= 20 }
+      if (numHP > 0) {
+        numHP -= 20
+      }
       if (numHP === 0) {
         rivalHP.style.color = 'red'
         const form = document.querySelector('#choosePkmn')
         const winningH1 = document.createElement('h1')
+        winningH1.setAttribute('id', 'you-won')
 
         let escText = document.querySelector('#escape-text')
         escText.innerHTML = 'press esc key to reset battle!'
@@ -56,7 +59,7 @@ const battlePoke = (yourId, rivalId, obj) => {
         winningH1.textContent = 'YOU WON!!'
         form.append(winningH1)
         const moves = document.querySelectorAll('#yourPokeMoves button')
-        moves.forEach(move => move.disabled = true)
+        moves.forEach((move) => (move.disabled = true))
       }
       rivalHP.textContent = numHP
 
@@ -69,13 +72,16 @@ const battlePoke = (yourId, rivalId, obj) => {
 
       const rivalPokeDiv = document.querySelector('#rivalPokeDiv')
       const rivalDiv = document.createElement('div')
+      rivalDiv.setAttribute('class', 'reset2')
       rivalDiv.textContent = `Rival used ${rivalMove}!`
       rivalPokeDiv.append(rivalDiv)
 
       // subtracting your HP
       const yourHP = document.querySelector('#yourPokeHP')
       let yourNumHP = parseInt(yourHP.textContent)
-      if (yourNumHP > 0) { yourNumHP -= 10 }
+      if (yourNumHP > 0) {
+        yourNumHP -= 10
+      }
       yourHP.textContent = yourNumHP
     })
   }
@@ -127,7 +133,7 @@ const battlePoke = (yourId, rivalId, obj) => {
   const yourMovesArray = [yourMove1, yourMove2, yourMove3, yourMove4]
   const rivalMovesArray = [rivalMove1, rivalMove2, rivalMove3, rivalMove4]
 
-  yourMovesArray.forEach(move => addClick(move))
+  yourMovesArray.forEach((move) => addClick(move))
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -176,9 +182,18 @@ document.addEventListener('DOMContentLoaded', () => {
       document.querySelector('#yourPokeHP').innerText = 100
       document.querySelector('#rivalPokeHP').innerText = 100
       const moves = document.querySelectorAll('#yourPokeMoves button')
-      moves.forEach(move => move.disabled = false)
+      moves.forEach((move) => (move.disabled = false))
       document.querySelector('#rivalPokeHP').style.color = 'black'
       document.querySelector('#escape-text').innerHTML = ''
+      document.querySelector('#you-won').remove()
+      const resetDivs1 = document.querySelectorAll('div .reset1')
+      resetDivs1.forEach((div) => {
+        div.remove()
+      })
+      const resetRivalDivs = document.querySelectorAll('div .reset2')
+      resetRivalDivs.forEach((rivalDiv) => {
+        rivalDiv.remove()
+      })
     }
   })
 
@@ -187,51 +202,52 @@ document.addEventListener('DOMContentLoaded', () => {
   const loopFetch = (maxId) => {
     let id = 1
     while (id <= maxId) {
-      fetchArray.push(fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
-        .then((resp) => resp.json())
-        .then((data) => {
-          addPokeObj(data)
-        }))
+      fetchArray.push(
+        fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+          .then((resp) => resp.json())
+          .then((data) => {
+            addPokeObj(data)
+          })
+      )
       id++
     }
   }
   loopFetch(51)
 
-  Promise.all(fetchArray)
-    .then(values => {
-      for (const id in pokeObj) { renderPoke(pokeObj, id) }
+  Promise.all(fetchArray).then((values) => {
+    for (const id in pokeObj) {
+      renderPoke(pokeObj, id)
+    }
 
-      //configuring select function to filter pokemon by type in pokelist 
-      const allOptions = document.querySelectorAll('#typeSelect option')
-      const selectType = document.querySelector('#typeSelect')
-      const pokeList = document.querySelectorAll('#pokeList > *')
-      const allTypes = document.querySelectorAll('#pokeList h1 h3')
+    //configuring select function to filter pokemon by type in pokelist
+    const allOptions = document.querySelectorAll('#typeSelect option')
+    const selectType = document.querySelector('#typeSelect')
+    const pokeList = document.querySelectorAll('#pokeList > *')
+    const allTypes = document.querySelectorAll('#pokeList h1 h3')
 
-      selectType.addEventListener('click', selectClick)
+    selectType.addEventListener('click', selectClick)
 
-      function selectClick(e) {
-        const allPokeDivs = document.querySelectorAll('div div')
-        allPokeDivs.forEach(div => div.style.display = 'block')
-        allTypes.forEach(type => {
-          if (e.target.value === 'All') { }
-          else if (type.textContent !== e.target.value) {
-            type.parentNode.parentNode.style.display = 'none'
-          }
-        })
-
-
-      }
-      //battlePoke(3, 6, pokeObj)
-    })
+    function selectClick(e) {
+      const allPokeDivs = document.querySelectorAll('div div')
+      allPokeDivs.forEach((div) => (div.style.display = 'block'))
+      allTypes.forEach((type) => {
+        if (e.target.value === 'All') {
+        } else if (type.textContent !== e.target.value) {
+          type.parentNode.parentNode.style.display = 'none'
+        }
+      })
+    }
+    //battlePoke(3, 6, pokeObj)
+  })
 
   const battleForm = document.querySelector('#choosePkmn')
   const handleSubmit = (e) => {
-    e.preventDefault();
+    e.preventDefault()
     const yourInput = document.querySelector('#yourEntry').value
     const rivalInput = document.querySelector('#rivalEntry').value
-    battlePoke(yourInput, rivalInput, pokeObj);
-  };
-  battleForm.addEventListener('submit', handleSubmit);
-
-
+    battlePoke(yourInput, rivalInput, pokeObj)
+    document.querySelector('#yourEntry').value = ''
+    document.querySelector('#rivalEntry').value = ''
+  }
+  battleForm.addEventListener('submit', handleSubmit)
 })
