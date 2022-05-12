@@ -18,6 +18,45 @@ const renderPoke = (obj, id) => {
   pokeType.className = 'pkmn'
   pokeType.textContent = obj[id].type
   pokeType.setAttribute('name', 'pokeType')
+
+  // If Else statement for adding color IDs to respective types
+
+  if (pokeType.textContent === 'bug') {
+    pokeType.id = 'bug'
+  } else if (pokeType.textContent === 'dragon') {
+    pokeType.id = 'dragon'
+  } else if (pokeType.textContent === 'electric') {
+    pokeType.id = 'electric'
+  } else if (pokeType.textContent === 'fairy') {
+    pokeType.id = 'fairy'
+  } else if (pokeType.textContent === 'fighting') {
+    pokeType.id = 'fighting'
+  } else if (pokeType.textContent === 'fire') {
+    pokeType.id = 'fire'
+  } else if (pokeType.textContent === 'flying') {
+    pokeType.id = 'flying'
+  } else if (pokeType.textContent === 'ghost') {
+    pokeType.id = 'ghost'
+  } else if (pokeType.textContent === 'grass') {
+    pokeType.id = 'grass'
+  } else if (pokeType.textContent === 'ground') {
+    pokeType.id = 'ground'
+  } else if (pokeType.textContent === 'ice') {
+    pokeType.id = 'ice'
+  } else if (pokeType.textContent === 'normal') {
+    pokeType.id = 'normal'
+  } else if (pokeType.textContent === 'poison') {
+    pokeType.id = 'poison'
+  } else if (pokeType.textContent === 'psychic') {
+    pokeType.id = 'psychic'
+  } else if (pokeType.textContent === 'rock') {
+    pokeType.id = 'rock'
+  } else if (pokeType.textContent === 'water') {
+    pokeType.id = 'water'
+  } else {
+    console.log("There's a missing type here...")
+  };
+
   //typeOption.textContent = obj[id].type
   //need to do something about options repeating -brian
   //typeOption.value = obj[id].type
