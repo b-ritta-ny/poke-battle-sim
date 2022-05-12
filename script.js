@@ -5,7 +5,7 @@ const renderPoke = (obj, id) => {
   const pokeId = document.createElement('h2')
   const pokeType = document.createElement('h3')
   const selectType = document.querySelector('#typeSelect')
-  const typeOption = document.createElement('option')
+  //const typeOption = document.createElement('option')
   const pokeDiv = document.createElement('div')
 
   pokeImg.className = 'choosePkmn'
@@ -18,9 +18,9 @@ const renderPoke = (obj, id) => {
   pokeType.className = 'pkmn'
   pokeType.textContent = obj[id].type
   pokeType.setAttribute('name', 'pokeType')
-  typeOption.textContent = obj[id].type
+  //typeOption.textContent = obj[id].type
   //need to do something about options repeating -brian
-  typeOption.value = obj[id].type
+  //typeOption.value = obj[id].type
   pokeDiv.id = id
 
   pokeList.appendChild(pokeDiv)
@@ -28,7 +28,7 @@ const renderPoke = (obj, id) => {
   pokeH1.appendChild(pokeId)
   pokeH1.appendChild(pokeType)
 
-  selectType.appendChild(typeOption)
+  //selectType.appendChild(typeOption)
 
 }
 
@@ -223,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       //configuring select function to filter pokemon by type in pokelist 
       const allOptions = document.querySelectorAll('#typeSelect option')
+      
       const selectType = document.querySelector('#typeSelect')
       const pokeList = document.querySelectorAll('#pokeList > *')
       const allTypes = document.querySelectorAll('#pokeList h1 h3')
@@ -239,9 +240,19 @@ document.addEventListener('DOMContentLoaded', () => {
           }
         })
 
-
       }
       //battlePoke(3, 6, pokeObj)
+    let typeArray = new Set()
+    for(const poke in pokeObj){
+      typeArray.add(pokeObj[poke].type)
+    }
+    typeArray.forEach(type=>{
+      const typeOption = document.createElement('option')
+      typeOption.textContent = type
+      typeOption.value = type
+      selectType.appendChild(typeOption)
+    })
+    
     })
 
   const battleForm = document.querySelector('#choosePkmn')
