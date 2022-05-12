@@ -19,6 +19,8 @@ const renderPoke = (obj, id) => {
   pokeType.textContent = obj[id].type
   pokeType.setAttribute('name', 'pokeType')
 
+  // If Else statement for adding color IDs to respective types
+
   if (pokeType.textContent === 'bug') {
     pokeType.id = 'bug'
   } else if (pokeType.textContent === 'dragon') {
