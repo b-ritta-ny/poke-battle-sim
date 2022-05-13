@@ -48,6 +48,16 @@ label {
   box-sizing: border-box;
 }
 
+select {
+  position: relative;
+  
+}
+
+option {
+  position: relative;
+  
+}
+
 h3.pkmn {
  font-size: x-large;
 }
@@ -152,14 +162,14 @@ h3.pkmn {
   padding-bottom: .5em;
 }
 
-#yourPokeDiv {
+html body div #yourPokeDiv {
   align-self: start;
   padding-right: 6em;
   display: inline-block;
 }
 
 
-#rivalPokeDiv {
+html body div#rivalPokeDiv {
   align-self: end;
   padding-left: 6em;
   display: inline-block;
@@ -269,9 +279,7 @@ img.choosePkmn {
   display: block;
 }
 
-.spacer {
-  display: hidden;
-  width: auto;
-  height: 3em;
-  color: transparent;
+.battlersParent {
+  padding-top: 2em;
+  display: flex;
 }
