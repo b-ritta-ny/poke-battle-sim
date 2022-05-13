@@ -1,28 +1,29 @@
 # poke-battle-sim README
-
 ## Requirements
 All you need is an updated browser to open the HTML file in
+<br><br>
 
 ## Project Notes
-This project was created using 
-
+This web application was created as a collaborative group project for Phase 1 of Flatiron School's full time software engineering bootcamp. 
+<br>
+This project was created using [PokéApi](https://pokeapi.co/), a RESTful API for Pokémon.
+<br><br>
 
 ## Setup
 
-Open the parent file, find 'index.html', and open that file in your browser.
+- Open the parent file, find 'index.html', and open that file in your browser.
 
-Choose the ID of the pokemon you want to battle with and the ID of the pokemon you want to battle against.
-Enter the IDs in their respective inputs in the form, and click the 'battle' button.
+- Choose the ID of the pokémon you want to battle with and the ID of the pokémon you want to battle against.
 
-Click on the move buttons to select a move to attack the rival pokemon. Your rival wil automatically attack back.
-Once a pokemon's HP has reached 0, the winner will be named.
+- Enter the IDs in their respective inputs in the form, and click the 'battle' button.
 
-Press the ESC key to reset the battle.
+- Click on the move buttons to select a move to attack the rival pokémon. Your rival wil automatically attack back.
 
+- Once a pokémon's HP has reached 0, the winner will be named.
 
-## Design Notes
-_If needed, pertinent design notes_
+- Press the ESC key to reset the battle.
 
+<br>
 
 ## Credits
 
